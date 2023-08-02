@@ -1,0 +1,12 @@
+.categoryDropDownContainer {
+    position: relative;
+}
+
+.categoryDropDownContainer span {
+    cursor: pointer;
+}
+
+.categoryDropDown {
+    position: absolute;
+    top: 0;
+}
