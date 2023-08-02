@@ -1,3 +1,13 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+nav>div {
+    display: inline-block;
+}
+
 .categoryDropDownContainer {
     position: relative;
 }
