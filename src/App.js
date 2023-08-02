@@ -1,6 +1,8 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
+import { ProductPage } from './components/productsPge/productPage';
 
 function App() {
 
@@ -9,30 +11,10 @@ function App() {
             <Header />
 
             <main className="mainContainer">
-                <section>
-                    2
-                </section>
-
-                <section>
-                    Cat Description
-                </section>
-
-                <section>
-                    Sort
-                </section>
-
-                <div className="productsContainer">
-                    <aside>
-                        Filter
-                    </aside>
-
-                    <section>
-                        <div className="productGrid">
-
-                        </div>
-                        <button>Load More</button>
-                    </section>
-                </div>
+                <Routes>
+                    <Route path='/' element={<Navigate to={'/1/cat1'} replace />} />
+                    <Route path='/:catId/:catName' element={<ProductPage />} />
+                </Routes>
             </main>
 
             <Footer />

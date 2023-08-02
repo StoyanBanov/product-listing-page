@@ -1,7 +1,53 @@
 [
     {
         "_id": 1,
-        "image": "img1",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    },
+    {
+        "_id": "2",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    },
+    {
+        "_id": "3",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    },
+    {
+        "_id": "4",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    },
+    {
+        "_id": "5",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    },
+    {
+        "_id": "6",
+        "catId": "1",
+        "thumbnail": "chair.jpg",
         "name": "prod1",
         "description": "short desc 1",
         "price": 22.50,

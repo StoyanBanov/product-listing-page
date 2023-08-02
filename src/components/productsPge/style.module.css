@@ -1,0 +1,35 @@
+.productTile {
+    --width: 300px
+}
+
+.productTile {
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--width);
+    height: 400px;
+}
+
+.productTile:hover {
+    box-shadow: 0px 0px 5px rgb(199, 199, 199);
+}
+
+.productTile p {
+    margin: 0;
+}
+
+.productTile img {
+    object-fit: contain;
+    width: var(--width);
+    height: var(--width);
+}
+
+.productGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
