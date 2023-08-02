@@ -1,0 +1,19 @@
+header {
+    position: sticky;
+    top: 0;
+}
+
+header>div {
+    display: inline-block;
+}
+
+.productGrid {
+    display: grid;
+}
+
+.mainContainer {}
+
+.productsContainer {
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,10 @@
+[
+    {
+        "_id": 1,
+        "image": "img1",
+        "name": "prod1",
+        "description": "short desc 1",
+        "price": 22.50,
+        "rating": 4
+    }
+]
