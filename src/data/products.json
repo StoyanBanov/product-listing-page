@@ -12,8 +12,8 @@
         "_id": "2",
         "catId": "1",
         "thumbnail": "chair.jpg",
-        "name": "prod1",
-        "description": "short desc 1",
+        "name": "prod2",
+        "description": "short desc 2",
         "price": 22.50,
         "rating": 4
     },
@@ -22,7 +22,7 @@
         "catId": "1",
         "thumbnail": "chair.jpg",
         "name": "prod1",
-        "description": "short desc 1",
+        "description": "short desc 3",
         "price": 22.50,
         "rating": 4
     },
@@ -30,8 +30,8 @@
         "_id": "4",
         "catId": "1",
         "thumbnail": "chair.jpg",
-        "name": "prod1",
-        "description": "short desc 1",
+        "name": "prod4",
+        "description": "short desc 4",
         "price": 22.50,
         "rating": 4
     },
@@ -39,8 +39,8 @@
         "_id": "5",
         "catId": "1",
         "thumbnail": "chair.jpg",
-        "name": "prod1",
-        "description": "short desc 1",
+        "name": "prod5",
+        "description": "short desc 5",
         "price": 22.50,
         "rating": 4
     },
@@ -48,8 +48,8 @@
         "_id": "6",
         "catId": "1",
         "thumbnail": "chair.jpg",
-        "name": "prod1",
-        "description": "short desc 1",
+        "name": "prod6",
+        "description": "short desc 6",
         "price": 22.50,
         "rating": 4
     }

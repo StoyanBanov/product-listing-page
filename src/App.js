@@ -3,11 +3,12 @@ import './App.css';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { ProductPage } from './components/productsPge/productPage';
+import { DimensionsContextProvider } from './components/common/contexts/dimensionsContext/DimensionsContext';
 
 function App() {
 
     return (
-        <>
+        <DimensionsContextProvider>
             <Header />
 
             <main className="mainContainer">
@@ -18,7 +19,7 @@ function App() {
             </main>
 
             <Footer />
-        </>
+        </DimensionsContextProvider>
     );
 }
 

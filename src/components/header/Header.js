@@ -1,23 +1,16 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useState } from "react"
 import { CategoryDropDown } from "./categoryDropDown"
 
 import style from './style.module.css'
+import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 export const Header = () => {
 
     const [showDropDown, setShowDropDown] = useState(false)
 
-    const [width, setWidth] = useState()
+    const [displayNav, setDisplayNav] = useState(false)
 
-    const [displayNav, setDisplayNav] = useState()
-
-    useEffect(() => {
-        setWidth(window.innerWidth)
-
-        window.addEventListener('resize', () => {
-            setWidth(window.innerWidth)
-        })
-    }, [])
+    const { windowWidth } = useContext(DimensionsContext)
 
     const categoryDropDownHandler = useCallback(e => {
         setShowDropDown(e.type === 'mouseover')
@@ -32,7 +25,7 @@ export const Header = () => {
             <div><h1>LOGO</h1></div>
 
             <nav>
-                {width < 1000
+                {windowWidth < 1000
                     ? <div style={{ display: 'inline' }} onMouseOver={displayNavHandler} onMouseOut={displayNavHandler}>
                         <svg width={20} height={20}>
                             <line x1={3} y1={3} x2={17} y2={3} stroke="black" strokeWidth={2} />
