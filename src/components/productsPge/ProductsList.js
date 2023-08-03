@@ -12,18 +12,21 @@ export const ProductsList = () => {
 
     const { catId } = useParams()
 
+    console.log(products.totalCount, skip, catId);
+
     useEffect(() => {
         getProducts({ catId, limit: 5 })
             .then(res => {
                 setProducts(res)
-                setSkip(5)
+                if (res.length)
+                    setSkip(res.length)
             })
     }, [catId])
 
     const loadMoreProductsHandler = useCallback(() => {
         getProducts({ catId, skip, limit: 5 }).then(res => {
             setProducts(state => ({ totalCount: res.totalCount, list: [...state.list, ...res.list] }))
-            setSkip(state => state + 5)
+            setSkip(state => state + res.length)
         })
     }, [catId, skip])
 

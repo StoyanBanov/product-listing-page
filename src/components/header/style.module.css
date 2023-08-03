@@ -17,7 +17,18 @@ nav>div {
 }
 
 .categoryDropDown {
+    list-style-type: none;
     z-index: 1;
     position: absolute;
     top: 0;
+}
+
+.categoryDropDown a {
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
+.categoryDropDown a:hover {
+    text-decoration: underline;
 }
