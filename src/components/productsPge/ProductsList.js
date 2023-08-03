@@ -8,26 +8,31 @@ import { useQueryParams } from "../common/hooks/useQueryParams"
 import style from './style.module.css'
 
 export const ProductsList = () => {
-    const [products, setProducts] = useState({ list: [], totalCount: 0 })
+    const [products, setProducts] = useState({ list: [], totalCount: 0, currentCount: 0 })
 
     const { catId } = useParams()
 
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
+    console.log(products.totalCount, products.currentCount);
+
     useEffect(() => {
         if (queryParamsObj) {
             getProducts({ catId, ...queryParamsObj })
                 .then(data => {
-                    setProducts(state =>
-                        !state.list.length || !queryParamsObj.skip
-                            ? data
-                            : ({ list: [...state.list, ...data.list], totalCount: data.totalCount }))
+                    setProducts(state => {
+                        const currentCount = (queryParamsObj.skip || state.list.length) + data.list.length
+                        return !state.list.length || !queryParamsObj.skip
+                            ? { ...data, currentCount }
+                            : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
+                    }
+                    )
                 })
         }
     }, [catId, queryParamsObj])
 
     const loadMoreProductsHandler = useCallback(() => {
-        const skip = products.list.length
+        const skip = products.currentCount
 
         setQueryParams({ ...queryParamsObj, skip })
     }, [queryParamsObj, setQueryParams, products])
@@ -40,7 +45,7 @@ export const ProductsList = () => {
                 }
             </div>
 
-            {products.totalCount > products.list.length
+            {products.totalCount > products.currentCount
                 ? <button onClick={loadMoreProductsHandler}>Load More</button>
                 : <p>No more products</p>
             }
