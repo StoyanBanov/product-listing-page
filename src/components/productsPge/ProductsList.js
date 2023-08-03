@@ -10,35 +10,27 @@ import style from './style.module.css'
 export const ProductsList = () => {
     const [products, setProducts] = useState({ list: [], totalCount: 0 })
 
-    const [skip, setSkip] = useState(0)
-
-    const [filterValues, setFilterValues] = useState({
-        show: 5
-    })
-
     const { catId } = useParams()
 
-    const { queryParamsObj } = useQueryParams()
+    const { queryParamsObj, setQueryParams } = useQueryParams()
 
     useEffect(() => {
-        setFilterValues(state => ({ ...state, ...queryParamsObj }));
-    }, [queryParamsObj])
-
-    useEffect(() => {
-        getProducts({ catId, limit: 5 })
+        getProducts({ catId, ...queryParamsObj, skip: 0 })
             .then(res => {
                 setProducts(res)
-                if (res.length)
-                    setSkip(res.length)
             })
-    }, [catId])
+    }, [catId, queryParamsObj])
 
     const loadMoreProductsHandler = useCallback(() => {
-        getProducts({ catId, skip, limit: filterValues.show }).then(res => {
-            setProducts(state => ({ totalCount: res.totalCount, list: [...state.list, ...res.list] }))
-            setSkip(state => state + res.length)
-        })
-    }, [catId, skip, filterValues.show])
+        const skip = products.list.length
+
+        getProducts({ catId, ...queryParamsObj, skip, count: skip + 5 })
+            .then(({ list, totalCount }) => {
+                setQueryParams({ ...queryParamsObj, skip, count: skip + list.length })
+
+                setProducts(state => ({ list: [...state.list, ...list], totalCount }))
+            })
+    }, [catId, queryParamsObj, setQueryParams, products])
 
     return (
         <section>
@@ -48,7 +40,7 @@ export const ProductsList = () => {
                 }
             </div>
 
-            {products.totalCount > skip
+            {products.totalCount > products.list.length
                 ? <button onClick={loadMoreProductsHandler}>Load More</button>
                 : <p>No more products</p>
             }
