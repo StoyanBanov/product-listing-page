@@ -3,6 +3,8 @@ import { getProducts } from "../../data/services/productService"
 import { ProductTile } from "./ProductTile"
 import { useParams } from "react-router-dom"
 
+import { useQueryParams } from "../common/hooks/useQueryParams"
+
 import style from './style.module.css'
 
 export const ProductsList = () => {
@@ -10,9 +12,17 @@ export const ProductsList = () => {
 
     const [skip, setSkip] = useState(0)
 
+    const [filterValues, setFilterValues] = useState({
+        show: 5
+    })
+
     const { catId } = useParams()
 
-    console.log(products.totalCount, skip, catId);
+    const { queryParamsObj } = useQueryParams()
+
+    useEffect(() => {
+        setFilterValues(state => ({ ...state, ...queryParamsObj }));
+    }, [queryParamsObj])
 
     useEffect(() => {
         getProducts({ catId, limit: 5 })
@@ -24,11 +34,11 @@ export const ProductsList = () => {
     }, [catId])
 
     const loadMoreProductsHandler = useCallback(() => {
-        getProducts({ catId, skip, limit: 5 }).then(res => {
+        getProducts({ catId, skip, limit: filterValues.show }).then(res => {
             setProducts(state => ({ totalCount: res.totalCount, list: [...state.list, ...res.list] }))
             setSkip(state => state + res.length)
         })
-    }, [catId, skip])
+    }, [catId, skip, filterValues.show])
 
     return (
         <section>
