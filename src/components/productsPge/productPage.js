@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react"
 import { ProductsList } from "./ProductsList"
-import { useQueryParams } from "../common/hooks/useQueryParams"
+import { ProductFilters } from "./ProductFilters"
 
 export const ProductPage = () => {
-
-    const [filterValues, setFilterValues] = useState({
-        show: 5
-    })
-
-    const { queryParamsObj } = useQueryParams()
-
-    useEffect(() => {
-        setFilterValues(state => ({ ...state, ...queryParamsObj }));
-    }, [queryParamsObj])
 
     return (
         <>
@@ -29,9 +18,7 @@ export const ProductPage = () => {
             </section>
 
             <div className="productsContainer">
-                <aside>
-                    Filter
-                </aside>
+                <ProductFilters />
 
                 <ProductsList />
             </div>

@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
-import { ProductPage } from './components/productsPge/productPage';
+import { ProductPage } from './components/productsPge/ProductPage';
 import { DimensionsContextProvider } from './components/common/contexts/dimensionsContext/DimensionsContext';
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
 
             <main className="mainContainer">
                 <Routes>
-                    <Route path='/' element={<Navigate to={'/1/cat1'} replace />} />
-                    <Route path='/:catId/:catName' element={<ProductPage />} />
+                    <Route path='/' element={<Navigate to={'categories/1/cat1'} replace />} />
+                    <Route path='/categories/:catId/:catName' element={<ProductPage />} />
                 </Routes>
             </main>
 

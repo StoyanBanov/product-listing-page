@@ -28,7 +28,7 @@ export const CategoryDropDown = () => {
 
             {showDropDown &&
                 <ul className={style.categoryDropDown}>
-                    {categories?.map(c => <li key={c._id}><NavLink to={`/${c._id}/${c.name}`}>{c.name}</NavLink></li>)}
+                    {categories?.map(c => <li key={c._id}><NavLink to={`/categories/${c._id}/${c.name}`}>{c.name}</NavLink></li>)}
                 </ul>
             }
         </div>

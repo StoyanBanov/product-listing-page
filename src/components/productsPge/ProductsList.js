@@ -15,22 +15,22 @@ export const ProductsList = () => {
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
     useEffect(() => {
-        getProducts({ catId, ...queryParamsObj, skip: 0 })
-            .then(res => {
-                setProducts(res)
-            })
+        if (queryParamsObj) {
+            getProducts({ catId, ...queryParamsObj })
+                .then(data => {
+                    setProducts(state =>
+                        !state.list.length || !queryParamsObj.skip
+                            ? data
+                            : ({ list: [...state.list, ...data.list], totalCount: data.totalCount }))
+                })
+        }
     }, [catId, queryParamsObj])
 
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.list.length
 
-        getProducts({ catId, ...queryParamsObj, skip, count: skip + 5 })
-            .then(({ list, totalCount }) => {
-                setQueryParams({ ...queryParamsObj, skip, count: skip + list.length })
-
-                setProducts(state => ({ list: [...state.list, ...list], totalCount }))
-            })
-    }, [catId, queryParamsObj, setQueryParams, products])
+        setQueryParams({ ...queryParamsObj, skip })
+    }, [queryParamsObj, setQueryParams, products])
 
     return (
         <section>
