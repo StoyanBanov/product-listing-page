@@ -43,9 +43,9 @@ export const ProductsList = ({ setItemsShownHandler }) => {
             getProducts({ catId, ...queryParamsObj, show })
                 .then(data => {
                     setProducts(state => {
-                        const currentCount = (queryParamsObj.skip ?? state.list.length) + data.list.length
+                        const currentCount = (queryParamsObj.skip ?? 0) + data.list.length
                         return (!state.list.length || !queryParamsObj.skip)
-                            ? { ...data, currentCount: (queryParamsObj.skip + data.list.length ?? data.list.length) }
+                            ? { ...data, currentCount }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
                     })
                 })
