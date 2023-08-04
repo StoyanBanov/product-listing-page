@@ -41,26 +41,32 @@ export const ProductFilters = () => {
     const rightCircle = useRef()
 
     const mouseMoveHandler = e => {
-        dragItem.current.style.cx = e.clientX
+        if (!dragItem.current) return
+        dragItem.current.style.cx = e.clientX - dragItem.current.startPositionX + dragItem.current.startCx
+
+        const currentCx = dragItem.current.style.cx
         if (dragItem.current.id === 'leftCircle') {
             const border = (Number(rightCircle.current.style.cx) || 90) - 10
 
-            if (e.clientX < 10) dragItem.current.style.cx = 10
-            else if (e.clientX > border) dragItem.current.style.cx = border
+            if (currentCx < 10) dragItem.current.style.cx = 10
+            else if (currentCx > border) dragItem.current.style.cx = border
 
-            setFilters(state => ({ ...state, minPrice: (Number(dragItem.current.style.cx) - 10) * 100 }))
+            setFilters(state => ({ ...state, minPrice: Math.trunc((Number(dragItem.current.style.cx) - 10) * 100) }))
         } else if (dragItem.current.id === 'rightCircle') {
             const border = (Number(leftCircle.current.style.cx) || 10) + 10
 
-            if (e.clientX > 90) dragItem.current.style.cx = 90
-            else if (e.clientX < border) dragItem.current.style.cx = border
+            if (currentCx > 90) dragItem.current.style.cx = 90
+            else if (currentCx < border) dragItem.current.style.cx = border
 
-            setFilters(state => ({ ...state, maxPrice: (Number(dragItem.current.style.cx) + 10) * 100 }))
+            setFilters(state => ({ ...state, maxPrice: Math.trunc((Number(dragItem.current.style.cx) + 10) * 100) }))
         }
     }
 
     const dragStart = (e) => {
         dragItem.current = e.target;
+        dragItem.current.startPositionX = dragItem.current.getBoundingClientRect().left
+        dragItem.current.startCx = Number(dragItem.current.style.cx) || dragItem.current.cx.baseVal.value
+
         window.addEventListener('mousemove', mouseMoveHandler)
         window.addEventListener('mouseup', dragEnd)
     };
@@ -68,7 +74,6 @@ export const ProductFilters = () => {
     const dragEnd = (e) => {
         window.removeEventListener('mousemove', mouseMoveHandler)
         window.removeEventListener('mouseup', dragEnd)
-        dragItem.current = null
     };
 
     return (

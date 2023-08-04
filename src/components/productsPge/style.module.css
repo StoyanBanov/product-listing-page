@@ -5,7 +5,7 @@
 .productTile {
     cursor: pointer;
     border-radius: 3px;
-    margin: 5px;
+    margin: 1vh;
     padding: 10px;
     background-color: rgb(248, 248, 248);
     display: flex;
@@ -41,7 +41,7 @@
 }
 
 .filterForm {
-    width: 300px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
