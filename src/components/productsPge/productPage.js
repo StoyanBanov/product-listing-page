@@ -5,6 +5,8 @@ import { useCallback, useEffect, useState } from "react"
 import { getCategoryById } from "../../data/services/categoryService"
 import { ProductsSort } from "./ProductsSort"
 
+import style from './style.module.css'
+
 export const ProductPage = () => {
     const [catDesc, setCatDesc] = useState('')
 
@@ -23,22 +25,24 @@ export const ProductPage = () => {
 
     return (
         <>
-            <section>
-                <article>
-                    <h2>{catName}</h2>
-                    <p>{catDesc}</p>
-                </article>
-            </section>
+            <div className={style.topSections}>
+                <section>
+                    <article className={style.categoryDescription}>
+                        <h2>{catName}</h2>
+                        <p>{catDesc}</p>
+                    </article>
+                </section>
 
-            <section>
-                <p>
-                    {`${itemsShown.shown}/${itemsShown.total}`}
-                </p>
-            </section>
+                <section>
+                    <p>
+                        {`${itemsShown.shown}/${itemsShown.total} products`}
+                    </p>
+                </section>
 
-            <section>
-                <ProductsSort />
-            </section>
+                <section>
+                    <ProductsSort />
+                </section>
+            </div>
 
             <div className="productsContainer">
                 <ProductFilters />

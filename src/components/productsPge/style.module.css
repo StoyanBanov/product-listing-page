@@ -1,12 +1,13 @@
 .productTile {
-    --width: 300px
+    --width: 280px
 }
 
 .productTile {
+    cursor: pointer;
     border-radius: 3px;
     margin: 5px;
     padding: 10px;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(248, 248, 248);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,15 +17,11 @@
 
 .productTile:hover {
     box-shadow: 0px 0px 5px rgb(199, 199, 199);
+    opacity: 80%;
 }
 
 .productTile p {
     margin: 0;
-}
-
-.productTile h3,
-.productTile img {
-    cursor: pointer;
 }
 
 .productTile h3:hover {
@@ -59,4 +56,39 @@
 
 .filterPriceSlider svg circle {
     cursor: pointer;
+}
+
+.topSections {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.topSections section:first-child,
+.topSections section:last-child {
+    flex-grow: 1;
+    display: flex;
+}
+
+.topSections section:first-child {
+    justify-content: flex-start;
+}
+
+.topSections section:last-child {
+    justify-content: flex-end;
+}
+
+.categoryDescription h2 {
+    text-transform: uppercase;
+}
+
+.categoryDescription h2,
+.categoryDescription p {
+    margin: 0;
+}
+
+.filtersContainer {
+    padding: 1vw;
 }

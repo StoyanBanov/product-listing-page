@@ -72,16 +72,18 @@ export const ProductFilters = () => {
     };
 
     return (
-        <aside>
+        <aside className={style.filtersContainer}>
             <h3>Filters</h3>
             <form className={style.filterForm} onSubmit={submitFiltersHandler}>
-                <select name="show" value={filters.show} onChange={changeFilterHandler}>
+                <label htmlFor="showFilter">Show</label>
+                <select id="showFilter" name="show" value={filters.show} onChange={changeFilterHandler}>
                     <option value={2}>2</option>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={15}>15</option>
                 </select>
 
+                <label>Price</label>
                 <div className={style.filterPriceSlider}>
                     <svg width={100} height={20}>
                         <line x1={10} y1={10} x2={90} y2={10} stroke="gray" strokeWidth={10} />
@@ -98,8 +100,8 @@ export const ProductFilters = () => {
                 </div>
 
                 <div>
-                    <label>search</label>
-                    <input name="search" value={filters.search} onChange={changeFilterHandler} />
+                    <label htmlFor="searchFilter">Search</label>
+                    <input id="searchFilter" name="search" value={filters.search} onChange={changeFilterHandler} />
                 </div>
 
                 <button>Filter</button>

@@ -26,7 +26,7 @@ export const ProductsList = ({ setItemsShownHandler }) => {
     }, [dimensions])
 
     useEffect(() => {
-        setItemsShownHandler({ shown: products.list.length, total: products.totalCount })
+        setItemsShownHandler({ shown: products.currentCount, total: products.totalCount })
     }, [setItemsShownHandler, products])
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export const ProductsList = ({ setItemsShownHandler }) => {
                     setProducts(state => {
                         const currentCount = (queryParamsObj.skip ?? state.list.length) + data.list.length
                         return (!state.list.length || !queryParamsObj.skip)
-                            ? { ...data, currentCount }
+                            ? { ...data, currentCount: (queryParamsObj.skip + data.list.length ?? data.list.length) }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
                     })
                 })

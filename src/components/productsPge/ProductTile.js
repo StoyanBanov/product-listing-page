@@ -9,7 +9,7 @@ export const ProductTile = ({ product }) => {
 
             <p><strong>{product.price.toFixed(2)}$</strong></p>
 
-            <p>{'*'.repeat(product.rating)}</p>
+            <p>{'★'.repeat(product.rating) + '☆'.repeat(5 - product.rating)}</p>
         </div>
     )
 }

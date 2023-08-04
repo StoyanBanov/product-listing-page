@@ -1,17 +1,11 @@
-header {
-    position: sticky;
-    top: 0;
-}
-
 header>div {
     display: inline-block;
 }
 
-.productGrid {
-    display: grid;
+main {
+    margin-left: 6vw;
+    margin-right: 6vw;
 }
-
-.mainContainer {}
 
 .productsContainer {
     display: flex;

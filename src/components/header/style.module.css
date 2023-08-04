@@ -1,11 +1,31 @@
 header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-left: 2vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    background-color: rgb(253, 253, 253);
+    border-bottom: 1px solid rgb(202, 202, 202);
     display: flex;
     flex-direction: row;
     align-items: baseline;
 }
 
+header h1 {
+    margin: 0;
+}
+
 nav>div {
     display: inline-block;
+}
+
+nav>div>span {
+    text-transform: uppercase;
+}
+
+nav>div>span:hover {
+    text-decoration: underline;
 }
 
 .categoryDropDownContainer {
@@ -17,10 +37,12 @@ nav>div {
 }
 
 .categoryDropDown {
+    background-color: rgb(250, 250, 250);
     list-style-type: none;
-    z-index: 1;
+    border: 1px solid rgb(199, 199, 199);
+    z-index: 2;
     position: absolute;
-    top: 0;
+    top: 5px;
 }
 
 .categoryDropDown a {
