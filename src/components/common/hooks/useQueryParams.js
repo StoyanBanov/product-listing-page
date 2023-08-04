@@ -7,7 +7,7 @@ export const useQueryParams = () => {
     const [queryParamsObj, setQueryParamsObj] = useState(null)
 
     useEffect(() => {
-        setQueryParamsObj(Object.fromEntries(Array.from(queryParams.entries()).map(([k, v]) => !isNaN(Number(v)) ? [k, Number(v)] : [k, v])))
+        setQueryParamsObj(Object.fromEntries(Array.from(queryParams.entries()).map(([k, v]) => !isNaN(Number(v)) && v !== '' ? [k, Number(v)] : [k, v])))
     }, [queryParams])
 
     return {

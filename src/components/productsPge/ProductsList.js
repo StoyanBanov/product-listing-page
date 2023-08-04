@@ -21,15 +21,15 @@ export const ProductsList = () => {
 
     useEffect(() => {
         if (queryParamsObj && windowWidth) {
-            const show = queryParamsObj.show ?? SHOW_PRODUCTS_DEFAULT
+            let show = queryParamsObj.show ?? SHOW_PRODUCTS_DEFAULT
             if (windowWidth < 600 && show > 5) {
-                queryParamsObj.show = 5
+                show = 5
             } else if (windowWidth < 1000 && show > 10) {
-                queryParamsObj.show = 10
+                show = 10
             } else if (windowWidth < 1400 && show > 20) {
-                queryParamsObj.show = 10
+                show = 10
             }
-            getProducts({ catId, ...queryParamsObj })
+            getProducts({ catId, ...queryParamsObj, show })
                 .then(data => {
                     setProducts(state => {
                         const currentCount = (queryParamsObj.skip ?? state.list.length) + data.list.length

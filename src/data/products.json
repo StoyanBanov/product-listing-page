@@ -5,7 +5,7 @@
         "thumbnail": "chair.jpg",
         "name": "prod1",
         "description": "short desc 1",
-        "price": 22.50,
+        "price": 10.50,
         "rating": 4
     },
     {
@@ -21,7 +21,7 @@
         "_id": "3",
         "catId": "1",
         "thumbnail": "chair.jpg",
-        "name": "prod1",
+        "name": "prod3",
         "description": "short desc 3",
         "price": 22.50,
         "rating": 4

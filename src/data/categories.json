@@ -1,10 +1,12 @@
 [
     {
         "_id": "1",
-        "name": "cat1"
+        "name": "cat1",
+        "description": "cat1 desc"
     },
     {
         "_id": "2",
-        "name": "cat2"
+        "name": "cat2",
+        "description": "cat2 desc"
     }
 ]
