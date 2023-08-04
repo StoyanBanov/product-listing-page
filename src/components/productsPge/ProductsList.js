@@ -14,14 +14,12 @@ export const ProductsList = () => {
 
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
-    console.log(products.totalCount, products.currentCount);
-
     useEffect(() => {
         if (queryParamsObj) {
             getProducts({ catId, ...queryParamsObj })
                 .then(data => {
                     setProducts(state => {
-                        const currentCount = (queryParamsObj.skip || state.list.length) + data.list.length
+                        const currentCount = (queryParamsObj.skip ?? state.list.length) + data.list.length
                         return !state.list.length || !queryParamsObj.skip
                             ? { ...data, currentCount }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
