@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { useQueryParams } from "../common/hooks/useQueryParams"
 import { SHOW_PRODUCTS_DEFAULT } from "./constants"
+import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 export const ProductFilters = () => {
     const [filters, setFilters] = useState({
@@ -9,9 +10,16 @@ export const ProductFilters = () => {
 
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
+    const { windowWidth } = useContext(DimensionsContext)
+
     useEffect(() => {
-        setFilters(state => ({ ...state, ...queryParamsObj }));
-    }, [queryParamsObj])
+        if (windowWidth) {
+            if (windowWidth < 700)
+                setFilters(state => ({ ...state, ...queryParamsObj, show: 5 }));
+            else
+                setFilters(state => ({ ...state, ...queryParamsObj }));
+        }
+    }, [queryParamsObj, windowWidth])
 
     const changeFilterHandler = useCallback(e => {
         setFilters(state => ({ ...state, [e.target.name]: e.target.value }))

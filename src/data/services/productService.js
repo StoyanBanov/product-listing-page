@@ -1,7 +1,6 @@
-import { SHOW_PRODUCTS_DEFAULT } from '../../components/productsPge/constants'
 import products from '../products.json'
 
-export function getProducts({ catId, skip = 0, show = SHOW_PRODUCTS_DEFAULT }) {
+export function getProducts({ catId, skip = 0, show }) {
     const count = skip + show
     return Promise.resolve({
         list: products.filter(i => i.catId === catId).slice(skip, count ?? undefined),

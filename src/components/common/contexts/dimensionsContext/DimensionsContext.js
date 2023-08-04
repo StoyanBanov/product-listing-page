@@ -17,7 +17,9 @@ export const DimensionsContextProvider = ({ children }) => {
     }, [])
 
     const updateDimensions = () => {
-        setDimensions({ windowWidth: window.innerWidth })
+        setDimensions({
+            windowWidth: window.innerWidth
+        })
     }
 
     return (

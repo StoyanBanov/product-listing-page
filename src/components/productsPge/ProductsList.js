@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { getProducts } from "../../data/services/productService"
 import { ProductTile } from "./ProductTile"
 import { useParams } from "react-router-dom"
-
 import { useQueryParams } from "../common/hooks/useQueryParams"
+import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
+
+import { SHOW_PRODUCTS_DEFAULT } from "./constants"
 
 import style from './style.module.css'
+
 
 export const ProductsList = () => {
     const [products, setProducts] = useState({ list: [], totalCount: 0, currentCount: 0 })
@@ -14,8 +17,18 @@ export const ProductsList = () => {
 
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
+    const { windowWidth } = useContext(DimensionsContext)
+
     useEffect(() => {
-        if (queryParamsObj) {
+        if (queryParamsObj && windowWidth) {
+            const show = queryParamsObj.show ?? SHOW_PRODUCTS_DEFAULT
+            if (windowWidth < 600 && show > 5) {
+                queryParamsObj.show = 5
+            } else if (windowWidth < 1000 && show > 10) {
+                queryParamsObj.show = 10
+            } else if (windowWidth < 1400 && show > 20) {
+                queryParamsObj.show = 10
+            }
             getProducts({ catId, ...queryParamsObj })
                 .then(data => {
                     setProducts(state => {
@@ -27,7 +40,7 @@ export const ProductsList = () => {
                     )
                 })
         }
-    }, [catId, queryParamsObj])
+    }, [catId, queryParamsObj, windowWidth])
 
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.currentCount
@@ -37,7 +50,7 @@ export const ProductsList = () => {
 
     return (
         <section>
-            <div className={style.productGrid}>
+            <div id="productsList" className={style.productGrid}>
                 {
                     products.list.map(p => <ProductTile key={p._id} product={p} />)
                 }
