@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { getProducts } from "../../data/services/productService"
 import { ProductTile } from "./ProductTile"
 import { useParams } from "react-router-dom"
@@ -17,22 +17,29 @@ export const ProductsList = ({ setItemsShownHandler }) => {
 
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
-    const { windowWidth } = useContext(DimensionsContext)
+    const dimensions = useContext(DimensionsContext)
+
+    const dim = useRef()
+
+    useEffect(() => {
+        dim.current = dimensions
+    }, [dimensions])
 
     useEffect(() => {
         setItemsShownHandler({ shown: products.list.length, total: products.totalCount })
     }, [setItemsShownHandler, products])
 
     useEffect(() => {
-        if (queryParamsObj && windowWidth) {
+        if (queryParamsObj && dim.current.windowWidth) {
             let show = queryParamsObj.show ?? SHOW_PRODUCTS_DEFAULT
-            if (windowWidth < 600 && show > 5) {
+            if (dim.current.windowWidth < 700 && show > 5) {
                 show = 5
-            } else if (windowWidth < 1000 && show > 10) {
+            } else if (dim.current.windowWidth < 1000 && show > 10) {
                 show = 10
-            } else if (windowWidth < 1400 && show > 20) {
-                show = 10
+            } else if (dim.current.windowWidth < 1400 && show > 20) {
+                show = 20
             }
+
             getProducts({ catId, ...queryParamsObj, show })
                 .then(data => {
                     setProducts(state => {
@@ -43,7 +50,7 @@ export const ProductsList = ({ setItemsShownHandler }) => {
                     })
                 })
         }
-    }, [catId, queryParamsObj, windowWidth])
+    }, [catId, queryParamsObj])
 
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.currentCount

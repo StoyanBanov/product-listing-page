@@ -5,7 +5,7 @@ import { useQueryParams } from "../common/hooks/useQueryParams"
 export const ProductsSort = () => {
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
-    const [sort, setSort] = useState('name asc')
+    const [sort, setSort] = useState('rating desc')
 
     useEffect(() => {
         if (queryParamsObj?.sortBy) {

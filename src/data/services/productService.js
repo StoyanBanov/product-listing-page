@@ -1,6 +1,6 @@
 import products from '../products.json'
 
-export function getProducts({ catId, skip = 0, show, sortBy, order = 'asc', minPrice = 0, maxPrice = 10000, search = '' }) {
+export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 'desc', minPrice = 0, maxPrice = 10000, search = '' }) {
     const count = skip + show
 
     const searchRegex = new RegExp(search, 'i')
