@@ -10,7 +10,7 @@ import { SHOW_PRODUCTS_DEFAULT } from "./constants"
 import style from './style.module.css'
 
 
-export const ProductsList = () => {
+export const ProductsList = ({ setItemsShownHandler }) => {
     const [products, setProducts] = useState({ list: [], totalCount: 0, currentCount: 0 })
 
     const { catId } = useParams()
@@ -18,6 +18,10 @@ export const ProductsList = () => {
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
     const { windowWidth } = useContext(DimensionsContext)
+
+    useEffect(() => {
+        setItemsShownHandler({ shown: products.list.length, total: products.totalCount })
+    }, [setItemsShownHandler, products])
 
     useEffect(() => {
         if (queryParamsObj && windowWidth) {
@@ -36,8 +40,7 @@ export const ProductsList = () => {
                         return !state.list.length || !queryParamsObj.skip
                             ? { ...data, currentCount }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
-                    }
-                    )
+                    })
                 })
         }
     }, [catId, queryParamsObj, windowWidth])

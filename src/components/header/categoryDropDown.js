@@ -15,7 +15,8 @@ export const CategoryDropDown = () => {
     }, [])
 
     useEffect(() => {
-        setCategories(getCategories())
+        getCategories()
+            .then(setCategories)
     }, [])
 
     return (

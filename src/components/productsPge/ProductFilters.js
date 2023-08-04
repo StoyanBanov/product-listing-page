@@ -90,10 +90,10 @@ export const ProductFilters = () => {
                 </div>
                 <div>
                     <label>min</label>
-                    <input type="number" name="minPrice" min={0} max={10000} value={filters.minPrice} onChange={changeFilterHandler} />
+                    <input type="number" name="minPrice" min={0} max={10000} value={filters.minPrice} onChange={changeFilterHandler} disabled />
 
                     <label>max</label>
-                    <input type="number" name="maxPrice" min={0} max={10000} value={filters.maxPrice} onChange={changeFilterHandler} />
+                    <input type="number" name="maxPrice" min={0} max={10000} value={filters.maxPrice} onChange={changeFilterHandler} disabled />
                 </div>
 
                 <div>
