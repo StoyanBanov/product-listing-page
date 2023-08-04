@@ -73,6 +73,7 @@ export const ProductFilters = () => {
 
     return (
         <aside>
+            <h3>Filters</h3>
             <form className={style.filterForm} onSubmit={submitFiltersHandler}>
                 <select name="show" value={filters.show} onChange={changeFilterHandler}>
                     <option value={2}>2</option>

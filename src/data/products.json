@@ -15,7 +15,7 @@
         "name": "prod2",
         "description": "short desc 2",
         "price": 22.50,
-        "rating": 4
+        "rating": 5
     },
     {
         "_id": "3",
@@ -24,7 +24,7 @@
         "name": "prod3",
         "description": "short desc 3",
         "price": 22.50,
-        "rating": 4
+        "rating": 3
     },
     {
         "_id": "4",
@@ -33,7 +33,7 @@
         "name": "prod4",
         "description": "short desc 4",
         "price": 22.50,
-        "rating": 4
+        "rating": 2
     },
     {
         "_id": "5",
@@ -51,6 +51,6 @@
         "name": "prod6",
         "description": "short desc 6",
         "price": 22.50,
-        "rating": 4
+        "rating": 1
     }
 ]

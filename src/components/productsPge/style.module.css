@@ -11,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     width: var(--width);
-    height: 400px;
+    height: 450px;
 }
 
 .productTile:hover {

@@ -3,13 +3,14 @@ import { ProductFilters } from "./ProductFilters"
 import { useParams } from "react-router-dom"
 import { useCallback, useEffect, useState } from "react"
 import { getCategoryById } from "../../data/services/categoryService"
+import { ProductsSort } from "./ProductsSort"
 
 export const ProductPage = () => {
     const [catDesc, setCatDesc] = useState('')
 
     const [itemsShown, setItemsShown] = useState({ shown: 0, total: 0 })
 
-    const { catId } = useParams()
+    const { catId, catName } = useParams()
 
     useEffect(() => {
         getCategoryById(catId)
@@ -23,17 +24,20 @@ export const ProductPage = () => {
     return (
         <>
             <section>
+                <article>
+                    <h2>{catName}</h2>
+                    <p>{catDesc}</p>
+                </article>
+            </section>
+
+            <section>
                 <p>
                     {`${itemsShown.shown}/${itemsShown.total}`}
                 </p>
             </section>
 
             <section>
-                {catDesc}
-            </section>
-
-            <section>
-                Sort
+                <ProductsSort />
             </section>
 
             <div className="productsContainer">

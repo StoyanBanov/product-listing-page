@@ -8,6 +8,8 @@ export const ProductTile = ({ product }) => {
             <p>{product.description}</p>
 
             <p><strong>{product.price.toFixed(2)}$</strong></p>
+
+            <p>{'*'.repeat(product.rating)}</p>
         </div>
     )
 }
