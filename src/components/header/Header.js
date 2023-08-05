@@ -7,10 +7,15 @@ import { CartContext } from "../common/contexts/CartContext"
 import { Cart } from "../cart/Cart"
 
 import style from './style.module.css'
-import { CategoryPop } from "./categoryPop"
+import { NavPop } from "./NavPop"
+import { usePop } from "../common/hooks/usePop"
 
 export const Header = () => {
     const [displayCategories, setDisplayCategories] = useState(false)
+
+    const switchDisplayCategoriesHandler = useCallback(() => {
+        setDisplayCategories(state => !state)
+    }, [])
 
     const { windowWidth } = useContext(DimensionsContext)
 
@@ -28,57 +33,21 @@ export const Header = () => {
         cartDropDownRef.current.style.display = e.type === 'mouseover' ? 'block' : 'none'
     }, [cartDropDownRef])
 
-    const displayCategoriesClickHandler = useCallback(e => {
-        const id = e.currentTarget.id
+    const { displayPopClickHandler } = usePop()
 
-        let leftPercent = id === 'catClose' ? 0 : -100
-        const endPercent = leftPercent ? 0 : -100
-        const step = leftPercent ? -10 : 10
-        if (id !== 'catClose')
-            setDisplayCategories(state => !state)
-
-        const transition = setInterval(() => {
-            if (categoriesRef.current) {
-                leftPercent -= step
-                categoriesRef.current.style.left = leftPercent + '%'
-
-                if (leftPercent === endPercent) {
-                    clearInterval(transition)
-                    if (id === 'catClose')
-                        setDisplayCategories(state => !state)
-                }
-            }
-        }, 30)
-    }, [])
+    const displayCategoriesClickHandler = useCallback((isOpening) => {
+        displayPopClickHandler(isOpening, categoriesRef, switchDisplayCategoriesHandler)
+    }, [displayPopClickHandler, categoriesRef, switchDisplayCategoriesHandler])
 
     return (
         <>
-            {
-                displayCategories &&
-                <div ref={categoriesRef} className={style.mobileCategoryPop}>
-                    <div className={style.categoryPopHeader}>
-                        <svg id="catClose" onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
-                            <line x1={2} y1={2} x2={28} y2={28} />
-                            <line x1={2} y1={28} x2={28} y2={2} />
-                        </svg>
-                        <h2>LOGO</h2>
-                    </div>
-                    <nav>
-                        <div className={style.categoryPopNavItem}>
-                            <div>
-                                <span>Categories</span>
-                            </div>
-
-                            <svg width={14} height={18} fill="none" stroke="black" strokeWidth={2}>
-                                <path d={'M12 2 L2 9 L12 16'} />
-                            </svg>
-                        </div>
-                    </nav>
-                </div>
+            {displayCategories &&
+                <NavPop categoriesRef={categoriesRef} displayCategoriesClickHandler={displayCategoriesClickHandler} />
             }
+
             <header>
                 {windowWidth < 1000 &&
-                    <svg onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
+                    <svg onClick={() => displayCategoriesClickHandler(true)} width={30} height={30} stroke="black" strokeWidth={2}>
                         <line x1={3} y1={8} x2={25} y2={8} />
                         <line x1={3} y1={17} x2={18} y2={17} />
                         <line x1={3} y1={27} x2={25} y2={27} />

@@ -35,7 +35,9 @@ export const ProductTile = ({ product }) => {
                     <circle r={1} cx={5} cy={21} />
                     <circle r={1} cx={13} cy={21} />
                 </svg>
-                ADD TO CART
+                <span>
+                    ADD TO CART
+                </span>
             </button>
         </div>
     )
