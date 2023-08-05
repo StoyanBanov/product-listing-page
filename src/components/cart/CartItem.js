@@ -15,7 +15,7 @@ export const CartItem = ({ itemObj: { item, count, _id } }) => {
 
     return (
         <div className={style.cartItemContainer}>
-            <h4>{item.title}</h4>
+            <h4>{item.name}</h4>
             <input type='number' min={1} max={item.count} defaultValue={count} onChange={CountChangeHandler}></input>
             <button onClick={RemoveItemHandler}>Remove</button>
         </div>

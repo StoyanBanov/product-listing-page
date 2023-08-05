@@ -11,3 +11,7 @@ main {
     display: flex;
     flex-direction: row;
 }
+
+svg {
+    cursor: pointer;
+}

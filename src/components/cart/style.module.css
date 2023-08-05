@@ -11,3 +11,7 @@
 .cart h4 {
     margin: 0;
 }
+
+.cartItemContainer input[type=number] {
+    width: 20px;
+}

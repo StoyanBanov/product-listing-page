@@ -1,15 +1,21 @@
+import { useCallback, useContext } from 'react'
+import { CartContext } from '../common/contexts/CartContext'
+
 import style from './style.module.css'
 
 export const ProductTile = ({ product }) => {
+    const { addToCart } = useContext(CartContext)
 
-
+    const addToCartHandler = useCallback(async () => {
+        await addToCart(product, 1)
+        window.alert(`${product.name} added to cart!`)
+    }, [addToCart, product])
 
     return (
         <div className={style.productTile}>
             <img src={'/images/' + product.thumbnail} alt={product.name} />
 
             <div>
-
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
 
@@ -18,7 +24,7 @@ export const ProductTile = ({ product }) => {
                 <p>{'★'.repeat(product.rating) + '☆'.repeat(5 - product.rating)}</p>
             </div>
 
-            <button style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <button onClick={addToCartHandler} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <svg stroke='black' strokeWidth={2} height="25" width="25" fill='rgb(245, 245, 245)'>
                     <path d="M19 7 L20 4 L23 4" />
 

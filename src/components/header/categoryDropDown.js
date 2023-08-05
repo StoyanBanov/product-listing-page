@@ -1,22 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
-
-import { getCategories } from '../../data/services/categoryService'
+import { useCallback, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useCategories } from '../common/hooks/useCategories'
 
 import style from './style.module.css'
-import { NavLink } from 'react-router-dom'
 
 export const CategoryDropDown = () => {
-    const [categories, setCategories] = useState()
+    const { categories } = useCategories()
 
     const [showDropDown, setShowDropDown] = useState(false)
 
     const categoryDropDownHandler = useCallback(e => {
         setShowDropDown(e.type === 'mouseover')
-    }, [])
-
-    useEffect(() => {
-        getCategories()
-            .then(setCategories)
     }, [])
 
     return (

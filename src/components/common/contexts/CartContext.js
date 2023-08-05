@@ -72,7 +72,6 @@ export const CartContextProvider = ({ children }) => {
         dispatch({ type: 'addToCart', itemObj: { item, count } })
 
         cartDropDownRef.current.style.display = 'block'
-
     }, [])
 
     const removeFromCart = useCallback(async (itemObj) => {

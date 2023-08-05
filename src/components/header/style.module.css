@@ -25,20 +25,20 @@ nav {
     align-items: center;
 }
 
-nav>div>span {
+nav span {
     text-transform: uppercase;
 }
 
-nav>div>span:hover {
+header nav span:hover {
     text-decoration: underline;
+}
+
+nav span {
+    cursor: pointer;
 }
 
 .categoryDropDownContainer {
     position: relative;
-}
-
-.categoryDropDownContainer span {
-    cursor: pointer;
 }
 
 .categoryDropDown {
@@ -93,4 +93,51 @@ nav>div>span:hover {
 .cartDiv>button:hover {
     background-color: rgb(206, 219, 241);
     border-color: rgb(105, 105, 105);
+}
+
+
+/* category pop */
+
+.mobileCategoryPop {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background: white;
+    height: 100%;
+    width: 100%;
+}
+
+.mobileCategoryPop nav {
+    margin: 0;
+}
+
+.categoryPopHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2vh;
+}
+
+.categoryPopHeader h2 {
+    margin: 0;
+}
+
+.categoryPopNavItem {
+    cursor: pointer;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+.categoryPopNavItem:hover {
+    opacity: 80%;
+}
+
+.categoryPopNavItem>div {
+    flex-grow: 1;
 }

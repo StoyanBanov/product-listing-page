@@ -7,6 +7,7 @@ import { CartContext } from "../common/contexts/CartContext"
 import { Cart } from "../cart/Cart"
 
 import style from './style.module.css'
+import { CategoryPop } from "./categoryPop"
 
 export const Header = () => {
     const [displayCategories, setDisplayCategories] = useState(false)
@@ -28,61 +29,69 @@ export const Header = () => {
     }, [cartDropDownRef])
 
     const displayCategoriesClickHandler = useCallback(e => {
-        if (e.target.id === 'catClose') {
-            let leftPercent = 0
-            const transition = setInterval(() => {
-                if (categoriesRef.current) {
-                    leftPercent -= 10
-                    categoriesRef.current.style.left = leftPercent + '%'
+        const id = e.currentTarget.id
 
-                    if (leftPercent === -100) {
-                        clearInterval(transition)
-                        setDisplayCategories(state => !state)
-                    }
-                }
-            }, 30)
-        } else {
+        let leftPercent = id === 'catClose' ? 0 : -100
+        const endPercent = leftPercent ? 0 : -100
+        const step = leftPercent ? -10 : 10
+        if (id !== 'catClose')
             setDisplayCategories(state => !state)
 
-            let leftPercent = 100
-            const transition = setInterval(() => {
-                if (categoriesRef.current) {
-                    leftPercent -= 10
-                    categoriesRef.current.style.left = -leftPercent + '%'
+        const transition = setInterval(() => {
+            if (categoriesRef.current) {
+                leftPercent -= step
+                categoriesRef.current.style.left = leftPercent + '%'
 
-                    if (leftPercent === 0) {
-                        clearInterval(transition)
-                    }
+                if (leftPercent === endPercent) {
+                    clearInterval(transition)
+                    if (id === 'catClose')
+                        setDisplayCategories(state => !state)
                 }
-            }, 30)
-        }
+            }
+        }, 30)
     }, [])
 
     return (
         <>
             {
                 displayCategories &&
-                <div ref={categoriesRef} style={{ zIndex: 999, position: 'fixed', top: 0, left: '-100%', background: 'white', height: '100%', width: '100%' }}>
-                    <svg id="catClose" onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
-                        <line x1={2} y1={2} x2={28} y2={28} />
-                        <line x1={2} y1={28} x2={28} y2={2} />
-                    </svg>
+                <div ref={categoriesRef} className={style.mobileCategoryPop}>
+                    <div className={style.categoryPopHeader}>
+                        <svg id="catClose" onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
+                            <line x1={2} y1={2} x2={28} y2={28} />
+                            <line x1={2} y1={28} x2={28} y2={2} />
+                        </svg>
+                        <h2>LOGO</h2>
+                    </div>
+                    <nav>
+                        <div className={style.categoryPopNavItem}>
+                            <div>
+                                <span>Categories</span>
+                            </div>
+
+                            <svg width={14} height={18} fill="none" stroke="black" strokeWidth={2}>
+                                <path d={'M12 2 L2 9 L12 16'} />
+                            </svg>
+                        </div>
+                    </nav>
                 </div>
             }
             <header>
+                {windowWidth < 1000 &&
+                    <svg onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
+                        <line x1={3} y1={8} x2={25} y2={8} />
+                        <line x1={3} y1={17} x2={18} y2={17} />
+                        <line x1={3} y1={27} x2={25} y2={27} />
+                    </svg>
+                }
+
                 <div>
                     <h1>LOGO</h1>
                 </div>
 
                 <nav>
-                    {windowWidth < 1000
-                        ? <svg onClick={displayCategoriesClickHandler} width={30} height={30} stroke="black" strokeWidth={2}>
-                            <line x1={3} y1={8} x2={25} y2={8} />
-                            <line x1={3} y1={17} x2={20} y2={17} />
-                            <line x1={3} y1={26} x2={25} y2={26} />
-                        </svg>
-
-                        : <CategoryDropDown />
+                    {windowWidth >= 1000 &&
+                        <CategoryDropDown />
                     }
 
                     <div className={style.cartDiv}>
