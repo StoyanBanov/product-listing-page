@@ -8,8 +8,10 @@ export const ProductsSort = () => {
     const [sort, setSort] = useState('rating desc')
 
     useEffect(() => {
-        if (queryParamsObj?.sortBy) {
-            setSort(queryParamsObj.sortBy + ' ' + queryParamsObj.order)
+        if (queryParamsObj) {
+            if (queryParamsObj.sortBy)
+                setSort(queryParamsObj.sortBy + ' ' + queryParamsObj.order)
+            else setSort('rating desc')
         }
     }, [queryParamsObj])
 
