@@ -27,63 +27,41 @@ export const ProductPage = () => {
     }, [])
 
     return (
-
         <>
-            {windowWidth > 1000
-                ? <>
-                    <div className={style.topSections}>
-                        <section>
-                            <article className={style.categoryDescription}>
-                                <h2>{catName}</h2>
-                                <p>{catDesc}</p>
-                            </article>
-                        </section>
+            <div className={style.topSections}>
+                <section>
+                    <article className={style.categoryDescription}>
+                        <h2>{catName}</h2>
+                        <p>{catDesc}</p>
+                    </article>
+                </section>
 
-                        <section>
-                            <p>
-                                {`${itemsShown.shown}/${itemsShown.total} products`}
-                            </p>
-                        </section>
+                <section>
+                    <p>
+                        {`${itemsShown.shown}/${itemsShown.total} products`}
+                    </p>
+                </section>
+            </div>
 
-                        <section>
-                            <ProductsSort />
-                        </section>
-                    </div>
+            {
+                windowWidth < 1000 &&
+                <div className="productsContainer">
+                    <button>Filters</button>
 
-                    <div className="productsContainer">
-                        <ProductFilters />
-
-                        <ProductsList setItemsShownHandler={setItemsShownHandler} />
-                    </div>
-                </>
-                : <>
-                    <div className={style.topSections}>
-                        <section>
-                            <article className={style.categoryDescription}>
-                                <h2>{catName}</h2>
-                                <p>{catDesc}</p>
-                            </article>
-                        </section>
-
-                        <section>
-                            <p>
-                                {`${itemsShown.shown}/${itemsShown.total} products`}
-                            </p>
-                        </section>
-
-
-                    </div>
-
-                    <div className="productsContainer">
-                        <ProductFilters />
-
-                        <section>
-                            <ProductsSort />
-                        </section>
-                    </div>
-                    <ProductsList setItemsShownHandler={setItemsShownHandler} />
-                </>
+                    <section>
+                        <ProductsSort />
+                    </section>
+                </div>
             }
+
+            <div className="productsContainer">
+                {
+                    windowWidth >= 1000 &&
+                    <ProductFilters />
+                }
+
+                <ProductsList setItemsShownHandler={setItemsShownHandler} />
+            </div>
 
         </>
     )

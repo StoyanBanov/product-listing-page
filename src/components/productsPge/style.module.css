@@ -3,9 +3,8 @@
 }
 
 .productTile {
-    cursor: pointer;
     border-radius: 3px;
-    margin: 1vh;
+    margin: 0.6vw;
     padding: 10px;
     background-color: rgb(248, 248, 248);
     display: flex;
@@ -24,14 +23,26 @@
     margin: 0;
 }
 
+.productTile h3,
+.productTile img,
+.productTile button {
+    cursor: pointer;
+}
+
 .productTile h3:hover {
+    cursor: pointer;
     text-decoration: underline;
 }
 
 .productTile img {
+    cursor: pointer;
     object-fit: contain;
     width: var(--width);
     height: var(--width);
+}
+
+.productTile>div {
+    height: 100%;
 }
 
 .productGrid {
@@ -51,7 +62,7 @@
     display: flex;
     align-items: center;
     height: 20px;
-    width: 100px;
+    width: 200px;
 }
 
 .filterPriceSlider svg circle {

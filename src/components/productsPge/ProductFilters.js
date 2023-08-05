@@ -42,23 +42,23 @@ export const ProductFilters = () => {
 
     const mouseMoveHandler = e => {
         if (!dragItem.current) return
-        dragItem.current.style.cx = e.clientX - dragItem.current.startPositionX + dragItem.current.startCx
+        dragItem.current.style.cx = e.clientX - dragItem.current.startPositionX + dragItem.current.startCx - 10
 
         const currentCx = dragItem.current.style.cx
         if (dragItem.current.id === 'leftCircle') {
-            const border = (Number(rightCircle.current.style.cx) || 90) - 10
+            const border = (Number(rightCircle.current.style.cx) || 190) - 5
 
             if (currentCx < 10) dragItem.current.style.cx = 10
             else if (currentCx > border) dragItem.current.style.cx = border
 
-            setFilters(state => ({ ...state, minPrice: Math.trunc((Number(dragItem.current.style.cx) - 10) * 100) }))
+            setFilters(state => ({ ...state, minPrice: Math.trunc((Number(dragItem.current.style.cx) - 10) * (10000 / 200)) }))
         } else if (dragItem.current.id === 'rightCircle') {
-            const border = (Number(leftCircle.current.style.cx) || 10) + 10
+            const border = (Number(leftCircle.current.style.cx) || 10) + 5
 
-            if (currentCx > 90) dragItem.current.style.cx = 90
+            if (currentCx > 190) dragItem.current.style.cx = 190
             else if (currentCx < border) dragItem.current.style.cx = border
 
-            setFilters(state => ({ ...state, maxPrice: Math.trunc((Number(dragItem.current.style.cx) + 10) * 100) }))
+            setFilters(state => ({ ...state, maxPrice: Math.trunc((Number(dragItem.current.style.cx) + 10) * (10000 / 200)) }))
         }
     }
 
@@ -90,10 +90,10 @@ export const ProductFilters = () => {
 
                 <label>Price</label>
                 <div className={style.filterPriceSlider}>
-                    <svg width={100} height={20}>
-                        <line x1={10} y1={10} x2={90} y2={10} stroke="gray" strokeWidth={10} />
+                    <svg width={200} height={20}>
+                        <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={10} />
                         <circle ref={leftCircle} id="leftCircle" onMouseDown={dragStart} cx={10} cy={10} r={10} fill="green" />
-                        <circle ref={rightCircle} id="rightCircle" onMouseDown={dragStart} cx={90} cy={10} r={10} fill="red" />
+                        <circle ref={rightCircle} id="rightCircle" onMouseDown={dragStart} cx={190} cy={10} r={10} fill="red" />
                     </svg>
                 </div>
                 <div>

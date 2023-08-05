@@ -21,6 +21,8 @@ export const ProductsList = ({ setItemsShownHandler }) => {
 
     const dim = useRef()
 
+    const startSkip = useRef(0)
+
     useEffect(() => {
         dim.current = dimensions
     }, [dimensions])
@@ -38,6 +40,12 @@ export const ProductsList = ({ setItemsShownHandler }) => {
                 show = 10
             } else if (dim.current.windowWidth < 1400 && show > 20) {
                 show = 20
+            }
+
+            if (startSkip.current !== undefined) {
+                show += (queryParamsObj.skip ?? 0)
+                queryParamsObj.skip = startSkip.current
+                startSkip.current = undefined
             }
 
             getProducts({ catId, ...queryParamsObj, show })
