@@ -41,6 +41,13 @@ export const ProductPage = () => {
                         {`${itemsShown.shown}/${itemsShown.total} products`}
                     </p>
                 </section>
+
+                {
+                    windowWidth >= 1000 &&
+                    <section>
+                        <ProductsSort />
+                    </section>
+                }
             </div>
 
             {

@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { useQueryParams } from "../common/hooks/useQueryParams"
-import { SHOW_PRODUCTS_DEFAULT } from "./constants"
+import { MAX_PRICE_DEFAULT, SHOW_PRODUCTS_DEFAULT } from "./constants"
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 import style from './style.module.css'
@@ -9,7 +9,7 @@ export const ProductFilters = () => {
     const [filters, setFilters] = useState({
         show: SHOW_PRODUCTS_DEFAULT,
         minPrice: 0,
-        maxPrice: 10000,
+        maxPrice: MAX_PRICE_DEFAULT,
         search: ''
     })
 
@@ -42,30 +42,33 @@ export const ProductFilters = () => {
 
     const mouseMoveHandler = e => {
         if (!dragItem.current) return
-        dragItem.current.style.cx = e.clientX - dragItem.current.startPositionX + dragItem.current.startCx - 10
+        dragItem.current.style.cx = e.clientX - dragItem.current.startPositionX + dragItem.current.startCx
 
-        const currentCx = dragItem.current.style.cx
-        if (dragItem.current.id === 'leftCircle') {
-            const border = (Number(rightCircle.current.style.cx) || 190) - 5
+        const currentCx = Number(dragItem.current.style.cx)
+        const cxBaseVal = dragItem.current.cx.baseVal.value
 
-            if (currentCx < 10) dragItem.current.style.cx = 10
+        const id = dragItem.current.id
+
+        const borderCircle = id === 'minPrice' ? rightCircle.current : leftCircle.current
+        const adjustment = id === 'minPrice' ? - dragItem.current.radius : dragItem.current.radius
+        const border = (Number(borderCircle.style.cx) || borderCircle.cx.baseVal.value) + adjustment / 2
+
+        if (id === 'minPrice') {
+            if (currentCx < cxBaseVal) dragItem.current.style.cx = cxBaseVal
             else if (currentCx > border) dragItem.current.style.cx = border
-
-            setFilters(state => ({ ...state, minPrice: Math.trunc((Number(dragItem.current.style.cx) - 10) * (10000 / 200)) }))
-        } else if (dragItem.current.id === 'rightCircle') {
-            const border = (Number(leftCircle.current.style.cx) || 10) + 5
-
-            if (currentCx > 190) dragItem.current.style.cx = 190
+        } else {
+            if (currentCx > cxBaseVal) dragItem.current.style.cx = cxBaseVal
             else if (currentCx < border) dragItem.current.style.cx = border
-
-            setFilters(state => ({ ...state, maxPrice: Math.trunc((Number(dragItem.current.style.cx) + 10) * (10000 / 200)) }))
         }
+
+        setFilters(state => ({ ...state, [id]: Math.trunc((Number(dragItem.current.style.cx) + adjustment) * (MAX_PRICE_DEFAULT / 200)) }))
     }
 
     const dragStart = (e) => {
         dragItem.current = e.target;
         dragItem.current.startPositionX = dragItem.current.getBoundingClientRect().left
-        dragItem.current.startCx = Number(dragItem.current.style.cx) || dragItem.current.cx.baseVal.value
+        dragItem.current.radius = dragItem.current.r.baseVal.value
+        dragItem.current.startCx = Number(dragItem.current.style.cx) || dragItem.current.cx.baseVal.value - dragItem.current.radius
 
         window.addEventListener('mousemove', mouseMoveHandler)
         window.addEventListener('mouseup', dragEnd)
@@ -92,8 +95,8 @@ export const ProductFilters = () => {
                 <div className={style.filterPriceSlider}>
                     <svg width={200} height={20}>
                         <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={10} />
-                        <circle ref={leftCircle} id="leftCircle" onMouseDown={dragStart} cx={10} cy={10} r={10} fill="green" />
-                        <circle ref={rightCircle} id="rightCircle" onMouseDown={dragStart} cx={190} cy={10} r={10} fill="red" />
+                        <circle ref={leftCircle} id="minPrice" onMouseDown={dragStart} cx={10} cy={10} r={10} fill="green" />
+                        <circle ref={rightCircle} id="maxPrice" onMouseDown={dragStart} cx={190} cy={10} r={10} fill="red" />
                     </svg>
                 </div>
                 <div>

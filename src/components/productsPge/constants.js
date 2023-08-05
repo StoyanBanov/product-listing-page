@@ -1,1 +1,3 @@
 export const SHOW_PRODUCTS_DEFAULT = 5
+
+export const MAX_PRICE_DEFAULT = 10000
