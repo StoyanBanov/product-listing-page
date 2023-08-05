@@ -6,8 +6,9 @@ export const usePop = () => {
         const endPercent = leftPercent ? 0 : -100
         const step = leftPercent ? -10 : 10
 
-        if (isOpening)
+        if (isOpening) {
             switchDisplayHandler()
+        }
 
         const transition = setInterval(() => {
             if (ref.current) {
