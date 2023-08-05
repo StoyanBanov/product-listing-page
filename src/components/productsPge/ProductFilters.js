@@ -83,13 +83,15 @@ export const ProductFilters = () => {
         <aside className={style.filtersContainer}>
             <h3>Filters</h3>
             <form className={style.filterForm} onSubmit={submitFiltersHandler}>
-                <label htmlFor="showFilter">Show</label>
-                <select id="showFilter" name="show" value={filters.show} onChange={changeFilterHandler}>
-                    <option value={2}>2</option>
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={15}>15</option>
-                </select>
+                <div>
+                    <label htmlFor="showFilter">Show </label>
+                    <select id="showFilter" name="show" value={filters.show} onChange={changeFilterHandler}>
+                        <option value={2}>2</option>
+                        <option value={5}>5</option>
+                        <option value={10}>10</option>
+                        <option value={15}>15</option>
+                    </select>
+                </div>
 
                 <label>Price</label>
                 <div className={style.filterPriceSlider}>

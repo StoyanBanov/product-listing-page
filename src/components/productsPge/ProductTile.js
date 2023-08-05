@@ -19,15 +19,15 @@ export const ProductTile = ({ product }) => {
             </div>
 
             <button style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <svg stroke='black' strokeWidth={2} height="26" width="25" fill='rgb(245, 245, 245)'>
+                <svg stroke='black' strokeWidth={2} height="25" width="25" fill='rgb(245, 245, 245)'>
                     <path d="M19 7 L20 4 L23 4" />
 
                     <path d="M1 7 L19 7 L16 15 L2 15 Z" />
 
                     <path d="M2 18 L16 18" />
 
-                    <circle r={1} cx={5} cy={22} />
-                    <circle r={1} cx={13} cy={22} />
+                    <circle r={1} cx={5} cy={21} />
+                    <circle r={1} cx={13} cy={21} />
                 </svg>
                 ADD TO CART
             </button>
