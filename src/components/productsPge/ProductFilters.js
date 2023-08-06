@@ -18,8 +18,8 @@ export const ProductFilters = () => {
     const { windowWidth } = useContext(DimensionsContext)
 
     useEffect(() => {
-        if (windowWidth) {
-            if (windowWidth < 700)
+        if (windowWidth && queryParamsObj) {
+            if (windowWidth < 700 && queryParamsObj.show > 5)
                 setFilters(state => ({ ...state, ...queryParamsObj, show: 5 }));
             else
                 setFilters(state => ({ ...state, ...queryParamsObj }));
