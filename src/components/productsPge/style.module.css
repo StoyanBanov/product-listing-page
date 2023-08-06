@@ -40,14 +40,22 @@
     text-decoration: underline;
 }
 
-.productTile img {
+.productTileImgContainer img {
     cursor: pointer;
     object-fit: contain;
     width: var(--width);
-    height: var(--width);
+    height: calc(var(--width) - 20px);
+    -webkit-box-reflect: below 0px linear-gradient(180deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
 }
 
-.productTile>div {
+.productTileImgContainer {
+    flex-shrink: 0;
+    height: var(--width);
+    overflow: hidden;
+    position: relative;
+}
+
+.productTileContentContainer {
     height: 100%;
 }
 

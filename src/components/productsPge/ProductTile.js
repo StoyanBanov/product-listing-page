@@ -13,9 +13,11 @@ export const ProductTile = ({ product }) => {
 
     return (
         <div className={style.productTile}>
-            <img src={'/images/' + product.thumbnail} alt={product.name} />
+            <div className={style.productTileImgContainer}>
+                <img src={'/images/' + product.thumbnail} alt={product.name} />
+            </div>
 
-            <div>
+            <div className={style.productTileContentContainer}>
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
 

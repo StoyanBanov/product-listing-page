@@ -2,7 +2,7 @@
     {
         "_id": 1,
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch1PNG.png",
         "name": "prod1",
         "description": "short desc 1",
         "price": 10.50,
@@ -11,7 +11,7 @@
     {
         "_id": "2",
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch2PNG.png",
         "name": "prod2",
         "description": "short desc 2",
         "price": 22.50,
@@ -20,7 +20,7 @@
     {
         "_id": "3",
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch3PNG.png",
         "name": "prod3",
         "description": "short desc 3",
         "price": 22.50,
@@ -29,7 +29,7 @@
     {
         "_id": "4",
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch4PNG.png",
         "name": "prod4",
         "description": "short desc 4",
         "price": 300.50,
@@ -38,7 +38,7 @@
     {
         "_id": "5",
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch5PNG.png",
         "name": "prod5",
         "description": "short desc 5",
         "price": 400.50,
@@ -47,9 +47,27 @@
     {
         "_id": "6",
         "catId": "1",
-        "thumbnail": "chair.png",
+        "thumbnail": "watch6PNG.png",
         "name": "prod6",
         "description": "short desc 6",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "7",
+        "catId": "1",
+        "thumbnail": "watch7PNG.png",
+        "name": "prod7",
+        "description": "short desc 7",
+        "price": 400.50,
+        "rating": 4
+    },
+    {
+        "_id": "8",
+        "catId": "1",
+        "thumbnail": "watch8PNG.png",
+        "name": "prod8",
+        "description": "short desc 8",
         "price": 22.50,
         "rating": 1
     }
