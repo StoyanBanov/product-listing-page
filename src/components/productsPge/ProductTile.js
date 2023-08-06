@@ -14,12 +14,14 @@ export const ProductTile = ({ product }) => {
     return (
         <div className={style.productTile}>
             <div className={style.productTileImgContainer}>
-                <img src={'/images/' + product.thumbnail} alt={product.name} />
+                <div>
+                    <img src={'/images/' + product.thumbnail} alt={product.name} />
+                </div>
             </div>
 
             <div className={style.productTileContentContainer}>
                 <h3>{product.name}</h3>
-                <p>{product.description}</p>
+                <p>{product.description.length <= 30 ? product.description : product.description.substring(0, 31) + '...'}</p>
 
                 <p><strong>{product.price.toFixed(2)}$</strong></p>
 

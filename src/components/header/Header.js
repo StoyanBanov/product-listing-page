@@ -39,7 +39,7 @@ export const Header = () => {
         <>
             {displayCategories &&
                 <PopBefore popRef={categoriesRef} displayPopClickHandler={displayCategoriesClickHandler}>
-                    <NavPop />
+                    <NavPop displayCategoriesClickHandler={displayCategoriesClickHandler} />
                 </PopBefore>
             }
 

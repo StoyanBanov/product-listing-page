@@ -4,7 +4,7 @@ import { useCategories } from '../common/hooks/useCategories'
 import style from './style.module.css'
 import { useCallback, useState } from 'react'
 
-export const NavPop = () => {
+export const NavPop = ({ displayCategoriesClickHandler }) => {
     const { categories } = useCategories()
 
     const [itemsVisibility, setItemsVisibility] = useState({
@@ -34,7 +34,7 @@ export const NavPop = () => {
 
                 {itemsVisibility.categories &&
                     <ul>
-                        {categories?.map(c => <li key={c._id}><NavLink to={`/categories/${c._id}/${c.name}`}>{c.name}</NavLink></li>)}
+                        {categories?.map(c => <li onClick={() => displayCategoriesClickHandler(false)} key={c._id}><NavLink to={`/categories/${c._id}/${c.name}`}>{c.name}</NavLink></li>)}
                     </ul>
                 }
             </div>

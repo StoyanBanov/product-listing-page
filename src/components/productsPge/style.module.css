@@ -1,13 +1,11 @@
-.productTile {
-    --width: 280px
-}
-
 .productsContainer {
     display: flex;
     flex-direction: row;
 }
 
 .productTile {
+    font-size: var(--fontSize);
+    box-sizing: border-box;
     border-radius: 3px;
     margin: 0.6vw;
     padding: 10px;
@@ -16,7 +14,11 @@
     flex-direction: column;
     align-items: center;
     width: var(--width);
-    height: 450px;
+    height: var(--height);
+}
+
+.productTile button {
+    font-size: var(--fontSize);
 }
 
 .productTile:hover {
@@ -36,7 +38,6 @@
 }
 
 .productTile h3:hover {
-    cursor: pointer;
     text-decoration: underline;
 }
 
@@ -44,20 +45,32 @@
     cursor: pointer;
     object-fit: contain;
     width: var(--width);
-    height: calc(var(--width) - 20px);
+    height: var(--imageHeight);
     -webkit-box-reflect: below 0px linear-gradient(180deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
 }
 
-.productTileImgContainer {
-    flex-shrink: 0;
-    height: var(--width);
+.productTileImgContainer div {
+    height: calc(var(--imageHeight) + 20px);
     overflow: hidden;
-    position: relative;
+}
+
+.productTileImgContainer {
+    flex-grow: 1;
 }
 
 .productTileContentContainer {
-    height: 100%;
+    width: 100%;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.productTileContentContainer h3 {
+    margin: 0;
+}
+
+/* product grid */
 
 .productGrid {
     display: flex;
@@ -88,7 +101,7 @@
     padding-right: 1vw;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: last baseline;
 }
 
 .topSections section:first-child,
@@ -105,6 +118,11 @@
     justify-content: flex-end;
 }
 
+/* cat description */
+.categoryDescription {
+    width: calc(var(--width) * 1.5);
+}
+
 .categoryDescription h2 {
     text-transform: uppercase;
 }
@@ -114,8 +132,52 @@
     margin: 0;
 }
 
+/* filter */
+
 .filtersContainer {
     padding: 1vw;
 }
 
-/* filters pop */
+/* mobile filter and sort */
+
+.mobileSortFilterContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-bottom: 2vh;
+}
+
+.mobileFiltersBtn {
+    padding: 0;
+    padding-left: 5px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    text-align: start;
+    box-sizing: border-box;
+}
+
+.sortContainer select,
+.mobileFiltersBtn {
+    width: var(--width);
+    margin: 0.6vw;
+}
+
+.sortContainer label {
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+}
+
+.sortContainer {
+    position: relative;
+}
+
+.sortContainer select {
+    width: var(--width);
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { useQueryParams } from "../common/hooks/useQueryParams"
 
+import style from './style.module.css'
 
 export const ProductsSort = () => {
     const { queryParamsObj, setQueryParams } = useQueryParams()
@@ -21,7 +22,7 @@ export const ProductsSort = () => {
     }, [queryParamsObj, setQueryParams])
 
     return (
-        <div>
+        <div className={style.sortContainer}>
             <label htmlFor="sortSelect">Sort by</label>
             <select id="sortSelect" name="sort" value={sort} onChange={sortChangeHandler}>
                 <option value={'price desc'}>price descending</option>

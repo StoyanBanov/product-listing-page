@@ -48,7 +48,7 @@ export const ProductPage = () => {
 
                 <section>
                     <p>
-                        {`${itemsShown.shown}/${itemsShown.total} products`}
+                        {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= 1000 ? 'products' : ''}`}
                     </p>
                 </section>
 
@@ -62,15 +62,15 @@ export const ProductPage = () => {
 
             {
                 windowWidth < 1000 &&
-                <div className={style.productsContainer}>
-                    <button onClick={displayFiltersClickHandler}>Filters</button>
+                <div className={style.mobileSortFilterContainer}>
+                    <button className={style.mobileFiltersBtn} onClick={displayFiltersClickHandler}>Filters</button>
                     {displayFilters &&
                         <PopBefore popRef={filtersRef} displayPopClickHandler={displayFiltersClickHandler}>
                             <ProductFilters />
                         </PopBefore>
                     }
 
-                    <section>
+                    <section className={style.mobileSortContainer}>
                         <ProductsSort />
                     </section>
                 </div>
