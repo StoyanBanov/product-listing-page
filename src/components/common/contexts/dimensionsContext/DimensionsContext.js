@@ -28,6 +28,11 @@ export const DimensionsContextProvider = ({ children }) => {
             rootPseudoElement.style.setProperty('--height', `${450 - Math.trunc((1000 - width) / 4)}px`)
 
             rootPseudoElement.style.setProperty('--fontSize', `${16 - Math.trunc((1000 - width) / 160)}px`)
+        } else {
+            rootPseudoElement.style.setProperty('--width', `${300}px`)
+            rootPseudoElement.style.setProperty('--height', `${450}px`)
+
+            rootPseudoElement.style.setProperty('--fontSize', `${16}px`)
         }
     }
 

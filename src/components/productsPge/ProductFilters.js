@@ -68,7 +68,11 @@ export const ProductFilters = () => {
         dragItem.current = e.target;
         dragItem.current.startPositionX = dragItem.current.getBoundingClientRect().left
         dragItem.current.radius = dragItem.current.r.baseVal.value
-        dragItem.current.startCx = Number(dragItem.current.style.cx) || dragItem.current.cx.baseVal.value - dragItem.current.radius
+
+        dragItem.current.startCx =
+            Number(dragItem.current.style.cx)
+                ? Number(dragItem.current.style.cx) - dragItem.current.radius
+                : dragItem.current.cx.baseVal.value - dragItem.current.radius
 
         window.addEventListener('mousemove', mouseMoveHandler)
         window.addEventListener('mouseup', dragEnd)
