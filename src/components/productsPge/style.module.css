@@ -2,6 +2,11 @@
     --width: 280px
 }
 
+.productsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
 .productTile {
     border-radius: 3px;
     margin: 0.6vw;
@@ -25,7 +30,8 @@
 
 .productTile h3,
 .productTile img,
-.productTile button {
+.productTile button,
+.productsContainer button {
     cursor: pointer;
 }
 
@@ -103,3 +109,5 @@
 .filtersContainer {
     padding: 1vw;
 }
+
+/* filters pop */

@@ -1,13 +1,15 @@
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 
 export const usePop = () => {
-    const displayPopClickHandler = useCallback((isOpening, ref, switchDisplayHandler) => {
+    const [displayPop, setDisplayPop] = useState(false)
+
+    const displayPopHandler = useCallback((isOpening, ref) => {
         let leftPercent = isOpening ? -100 : 0
         const endPercent = leftPercent ? 0 : -100
         const step = leftPercent ? -10 : 10
 
         if (isOpening) {
-            switchDisplayHandler()
+            setDisplayPop(true)
         }
 
         const transition = setInterval(() => {
@@ -18,13 +20,14 @@ export const usePop = () => {
                 if (leftPercent === endPercent) {
                     clearInterval(transition)
                     if (!isOpening)
-                        switchDisplayHandler()
+                        setDisplayPop(false)
                 }
             }
         }, 30)
     }, [])
 
     return {
-        displayPopClickHandler
+        displayPop,
+        displayPopHandler
     }
 }

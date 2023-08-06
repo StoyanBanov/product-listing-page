@@ -1,14 +1,18 @@
 import { ProductsList } from "./ProductsList"
 import { ProductFilters } from "./ProductFilters"
 import { useParams } from "react-router-dom"
-import { useCallback, useContext, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { getCategoryById } from "../../data/services/categoryService"
 import { ProductsSort } from "./ProductsSort"
+import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
+import { usePop } from "../common/hooks/usePop"
+import { PopBefore } from "../common/helpers/popBefore/PopBefore"
 
 import style from './style.module.css'
-import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 export const ProductPage = () => {
+    const filtersRef = useRef()
+
     const [catDesc, setCatDesc] = useState('')
 
     const [itemsShown, setItemsShown] = useState({ shown: 0, total: 0 })
@@ -25,6 +29,12 @@ export const ProductPage = () => {
     const setItemsShownHandler = useCallback(({ shown, total }) => {
         setItemsShown({ shown, total })
     }, [])
+
+    const { displayPop: displayFilters, displayPopHandler } = usePop()
+
+    const displayFiltersClickHandler = useCallback((isOpening) => {
+        displayPopHandler(isOpening, filtersRef)
+    }, [displayPopHandler, filtersRef])
 
     return (
         <>
@@ -52,8 +62,13 @@ export const ProductPage = () => {
 
             {
                 windowWidth < 1000 &&
-                <div className="productsContainer">
-                    <button>Filters</button>
+                <div className={style.productsContainer}>
+                    <button onClick={displayFiltersClickHandler}>Filters</button>
+                    {displayFilters &&
+                        <PopBefore popRef={filtersRef} displayPopClickHandler={displayFiltersClickHandler}>
+                            <ProductFilters />
+                        </PopBefore>
+                    }
 
                     <section>
                         <ProductsSort />
@@ -61,7 +76,7 @@ export const ProductPage = () => {
                 </div>
             }
 
-            <div className="productsContainer">
+            <div className={style.productsContainer}>
                 {
                     windowWidth >= 1000 &&
                     <ProductFilters />

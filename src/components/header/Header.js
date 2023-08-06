@@ -9,13 +9,9 @@ import { Cart } from "../cart/Cart"
 import style from './style.module.css'
 import { NavPop } from "./NavPop"
 import { usePop } from "../common/hooks/usePop"
+import { PopBefore } from "../common/helpers/popBefore/PopBefore"
 
 export const Header = () => {
-    const [displayCategories, setDisplayCategories] = useState(false)
-
-    const switchDisplayCategoriesHandler = useCallback(() => {
-        setDisplayCategories(state => !state)
-    }, [])
 
     const { windowWidth } = useContext(DimensionsContext)
 
@@ -33,16 +29,18 @@ export const Header = () => {
         cartDropDownRef.current.style.display = e.type === 'mouseover' ? 'block' : 'none'
     }, [cartDropDownRef])
 
-    const { displayPopClickHandler } = usePop()
+    const { displayPop: displayCategories, displayPopHandler } = usePop()
 
     const displayCategoriesClickHandler = useCallback((isOpening) => {
-        displayPopClickHandler(isOpening, categoriesRef, switchDisplayCategoriesHandler)
-    }, [displayPopClickHandler, categoriesRef, switchDisplayCategoriesHandler])
+        displayPopHandler(isOpening, categoriesRef)
+    }, [displayPopHandler, categoriesRef])
 
     return (
         <>
             {displayCategories &&
-                <NavPop categoriesRef={categoriesRef} displayCategoriesClickHandler={displayCategoriesClickHandler} />
+                <PopBefore popRef={categoriesRef} displayPopClickHandler={displayCategoriesClickHandler}>
+                    <NavPop />
+                </PopBefore>
             }
 
             <header>

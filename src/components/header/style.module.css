@@ -142,17 +142,6 @@ nav span {
     color: black;
 }
 
-.popHeader {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 2vh;
-}
-
-.popHeader h2 {
-    margin: 0;
-}
-
 .popNavItem {
     cursor: pointer;
     box-sizing: border-box;
@@ -178,20 +167,4 @@ nav span {
 
 .popNavItemTop>div {
     flex-grow: 1;
-}
-
-.mobileNavPop {
-    z-index: 999;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    background: white;
-    height: 100%;
-    width: 60%;
-}
-
-@media only screen and (max-width: 600px) {
-    .mobileNavPop {
-        width: 100%;
-    }
 }

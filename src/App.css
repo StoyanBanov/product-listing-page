@@ -7,11 +7,6 @@ main {
     margin-right: 8vw;
 }
 
-.productsContainer {
-    display: flex;
-    flex-direction: row;
-}
-
 svg {
     cursor: pointer;
 }
