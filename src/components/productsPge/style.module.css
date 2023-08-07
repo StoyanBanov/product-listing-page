@@ -2,19 +2,21 @@
     width: var(--mainWidth);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .productTile {
     font-size: var(--fontSize);
     box-sizing: border-box;
     border-radius: 3px;
-    margin-bottom: 1.4vw;
+    margin-bottom: 1vw;
     padding: 10px;
     background-color: rgb(241, 244, 245);
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
     width: var(--width);
     height: var(--height);
 }
@@ -76,10 +78,10 @@
 
 .productGrid {
     display: flex;
-    width: var(--prodGridWidth);
+    /* width: var(--prodGridWidth); */
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .topSections {
@@ -98,6 +100,7 @@
 
 .topSections section:first-child {
     justify-content: flex-start;
+    margin-left: 0.5vw;
 }
 
 .topSections section:last-child {
@@ -122,6 +125,8 @@
 
 .filtersContainer {
     width: var(--width);
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
     flex-shrink: 0;
 }
 
@@ -171,7 +176,7 @@
     display: flex;
     width: var(--mainWidth);
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 30px;
     margin-bottom: 2vh;
 }
@@ -179,6 +184,8 @@
 .sortContainer select,
 .mobileFiltersBtn {
     width: var(--width);
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }
 
 .mobileFiltersBtn {
@@ -195,6 +202,7 @@
 .sortContainer label {
     position: absolute;
     top: -20px;
+    left: 0.5vw;
     font-size: 12px;
 }
 
@@ -208,4 +216,12 @@
     border: none;
     border-bottom: 1px solid black;
     box-sizing: border-box;
+}
+
+/* prods total section */
+
+.productsTotalSection p {
+    padding-right: 2px;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
 }

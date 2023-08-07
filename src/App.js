@@ -15,7 +15,7 @@ function App() {
 
                 <main className="mainContainer">
                     <Routes>
-                        <Route path='/' element={<Navigate to={'categories/1/cat1'} replace />} />
+                        <Route path='/' element={<Navigate to={'categories/1/watches'} replace />} />
                         <Route path='/categories/:catId/:catName' element={<ProductPage />} />
                     </Routes>
                 </main>

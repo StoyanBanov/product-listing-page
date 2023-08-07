@@ -1,12 +1,12 @@
 [
     {
         "_id": "1",
-        "name": "cat1",
-        "description": "cat1 desc sad as dsdasdsadas sa dsa das. das dasd asd sa as das as dasdsadasdasadsadsadasdd."
+        "name": "watches",
+        "description": "Watches short description here."
     },
     {
         "_id": "2",
-        "name": "cat2",
-        "description": "cat2 desc"
+        "name": "necklaces",
+        "description": "Necklaces short description here."
     }
 ]

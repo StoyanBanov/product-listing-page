@@ -46,7 +46,7 @@ export const ProductPage = () => {
                     </article>
                 </section>
 
-                <section>
+                <section className={style.productsTotalSection}>
                     <p>
                         {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= 1000 ? ' products' : ''}`}
                     </p>

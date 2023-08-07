@@ -5,9 +5,8 @@ import { useParams } from "react-router-dom"
 import { useQueryParams } from "../common/hooks/useQueryParams"
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
-import { SHOW_PRODUCTS_DEFAULT } from "./constants"
-
 import style from './style.module.css'
+import { setCorrectShowValue } from "./util"
 
 
 export const ProductsList = ({ setItemsShownHandler }) => {
@@ -33,14 +32,7 @@ export const ProductsList = ({ setItemsShownHandler }) => {
 
     useEffect(() => {
         if (queryParamsObj && dim.current.windowWidth) {
-            let show = queryParamsObj.show ?? SHOW_PRODUCTS_DEFAULT
-            if (dim.current.windowWidth < 700 && show > 5) {
-                show = 5
-            } else if (dim.current.windowWidth < 1000 && show > 10) {
-                show = 10
-            } else if (dim.current.windowWidth < 1400 && show > 20) {
-                show = 20
-            }
+            let show = setCorrectShowValue(queryParamsObj.show, dim.current.windowWidth)
 
             if (startSkip.current !== undefined) {
                 show += (queryParamsObj.skip ?? 0)

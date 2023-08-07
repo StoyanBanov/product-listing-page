@@ -10,7 +10,6 @@ export const PopBefore = ({ popRef, displayPopClickHandler, children }) => {
                         <line x1={2} y1={2} x2={28} y2={28} />
                         <line x1={2} y1={28} x2={28} y2={2} />
                     </svg>
-                    <h2>LOGO</h2>
                 </div>
                 {children}
             </div>

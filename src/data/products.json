@@ -70,5 +70,59 @@
         "description": "short desc 8",
         "price": 22.50,
         "rating": 1
+    },
+    {
+        "_id": "9",
+        "catId": "2",
+        "thumbnail": "neck1.png",
+        "name": "prod9",
+        "description": "short desc 9",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "10",
+        "catId": "2",
+        "thumbnail": "neck2.png",
+        "name": "prod10",
+        "description": "short desc 10",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "11",
+        "catId": "2",
+        "thumbnail": "neck3.png",
+        "name": "prod11",
+        "description": "short desc 11",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "12",
+        "catId": "2",
+        "thumbnail": "neck4.png",
+        "name": "prod12",
+        "description": "short desc 12",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "13",
+        "catId": "2",
+        "thumbnail": "neck5.png",
+        "name": "prod13",
+        "description": "short desc 13",
+        "price": 22.50,
+        "rating": 1
+    },
+    {
+        "_id": "14",
+        "catId": "2",
+        "thumbnail": "neck6.png",
+        "name": "prod14",
+        "description": "short desc 14",
+        "price": 22.50,
+        "rating": 1
     }
 ]
