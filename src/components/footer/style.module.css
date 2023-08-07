@@ -1,10 +1,18 @@
 .footerContainer {
-    padding: 0.5vw;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
     margin-top: 2vh;
-    display: flex;
-    flex-direction: column;
     background-color: black;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footerItemsContainer {
+    display: flex;
+    flex-direction: column;
+    width: var(--mainWidth)
 }
 
 .footerContainer a {

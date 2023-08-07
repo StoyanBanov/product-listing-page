@@ -1,26 +1,38 @@
 header {
     position: sticky;
-    top: 0;
+    top: -54px;
     z-index: 2;
-    padding-left: 2vw;
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: rgb(253, 253, 253);
     border-bottom: 1px solid rgb(202, 202, 202);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
+header>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+header>nav>svg {
+    margin-right: 20px;
+}
+
+header>div,
+header nav {
+    width: var(--mainWidth);
+}
+
 header h1 {
+    font-size: 40px;
     margin: 0;
 }
 
 nav {
-    margin-left: 4vw;
-    margin-right: 4vw;
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,10 +44,6 @@ nav span {
 
 header nav span:hover {
     text-decoration: underline;
-}
-
-header>svg {
-    flex-shrink: 0;
 }
 
 nav span {

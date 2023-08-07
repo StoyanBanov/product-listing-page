@@ -85,7 +85,7 @@ export const ProductFilters = () => {
 
     return (
         <aside className={style.filtersContainer}>
-            <h3>Filters</h3>
+            <h3>FILTERS</h3>
             <form className={style.filterForm} onSubmit={submitFiltersHandler}>
                 <div>
                     <label htmlFor="showFilter">Show </label>
@@ -97,20 +97,26 @@ export const ProductFilters = () => {
                     </select>
                 </div>
 
-                <label>Price</label>
-                <div className={style.filterPriceSlider}>
-                    <svg width={200} height={20}>
-                        <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={10} />
-                        <circle ref={leftCircle} id="minPrice" onMouseDown={dragStart} cx={10} cy={10} r={10} fill="green" />
-                        <circle ref={rightCircle} id="maxPrice" onMouseDown={dragStart} cx={190} cy={10} r={10} fill="red" />
-                    </svg>
-                </div>
-                <div>
-                    <label>min</label>
-                    <input type="number" name="minPrice" min={0} max={10000} value={filters.minPrice} onChange={changeFilterHandler} disabled />
+                <div className={style.filterPriceContainer}>
+                    <label>Price</label>
+                    <div className={style.filterPriceSlider}>
+                        <svg width={200} height={20}>
+                            <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={10} />
+                            <circle ref={leftCircle} id="minPrice" onMouseDown={dragStart} cx={10} cy={10} r={10} fill="green" />
+                            <circle ref={rightCircle} id="maxPrice" onMouseDown={dragStart} cx={190} cy={10} r={10} fill="red" />
+                        </svg>
+                    </div>
 
-                    <label>max</label>
-                    <input type="number" name="maxPrice" min={0} max={10000} value={filters.maxPrice} onChange={changeFilterHandler} disabled />
+                    <div>
+                        <div>
+                            <label>min</label>
+                            <input type="number" name="minPrice" min={0} max={10000} value={filters.minPrice} onChange={changeFilterHandler} disabled />
+                        </div>
+                        <div>
+                            <label>max</label>
+                            <input type="number" name="maxPrice" min={0} max={10000} value={filters.maxPrice} onChange={changeFilterHandler} disabled />
+                        </div>
+                    </div>
                 </div>
 
                 <div>
@@ -118,7 +124,7 @@ export const ProductFilters = () => {
                     <input id="searchFilter" name="search" value={filters.search} onChange={changeFilterHandler} />
                 </div>
 
-                <button>Filter</button>
+                <button>SHOW RESULTS</button>
             </form>
         </aside>
     )

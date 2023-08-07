@@ -8,9 +8,9 @@ export const Cart = () => {
 
     return (
         <div className={style.cart}>
-            <h1>cart</h1>
+            <h2>cart</h2>
             {cart?.items?.map((itemObj) => <CartItem key={itemObj.item._id} itemObj={itemObj} />)}
-            <p>Total: {cart.totalPrice}</p>
+            <p><strong>Total: {cart.totalPrice}$</strong></p>
             <button onClick={purchaseClickHandler}>Purchase</button>
             <button onClick={emptyCartClickHandler}>Empty</button>
         </div>

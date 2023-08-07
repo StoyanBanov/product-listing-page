@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { CategoryDropDown } from "./categoryDropDown"
 
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
@@ -35,6 +35,7 @@ export const Header = () => {
         displayPopHandler(isOpening, categoriesRef)
     }, [displayPopHandler, categoriesRef])
 
+
     return (
         <>
             {displayCategories &&
@@ -44,19 +45,25 @@ export const Header = () => {
             }
 
             <header>
-                {windowWidth < 1000 &&
-                    <svg onClick={() => displayCategoriesClickHandler(true)} width={30} height={30} stroke="black" strokeWidth={2}>
-                        <line x1={3} y1={8} x2={25} y2={8} />
-                        <line x1={3} y1={17} x2={18} y2={17} />
-                        <line x1={3} y1={27} x2={25} y2={27} />
-                    </svg>
+
+                {windowWidth >= 1000 &&
+                    <div>
+                        <h1>LOGO</h1>
+                    </div>
                 }
 
-                <div>
-                    <h1>LOGO</h1>
-                </div>
-
                 <nav>
+                    {windowWidth < 1000 &&
+                        <>
+                            <svg onClick={() => displayCategoriesClickHandler(true)} width={30} height={30} stroke="black" strokeWidth={2}>
+                                <line x1={3} y1={8} x2={25} y2={8} />
+                                <line x1={3} y1={17} x2={18} y2={17} />
+                                <line x1={3} y1={27} x2={25} y2={27} />
+                            </svg>
+                            <h1>LOGO</h1>
+                        </>
+                    }
+
                     {windowWidth >= 1000 &&
                         <CategoryDropDown />
                     }
@@ -103,7 +110,7 @@ export const Header = () => {
 
                 </nav>
 
-            </header>
+            </header >
         </>
     )
 }

@@ -13,11 +13,11 @@ import style from './style.module.css'
 export const ProductPage = () => {
     const filtersRef = useRef()
 
+    const { catId, catName } = useParams()
+
     const [catDesc, setCatDesc] = useState('')
 
     const [itemsShown, setItemsShown] = useState({ shown: 0, total: 0 })
-
-    const { catId, catName } = useParams()
 
     const { windowWidth } = useContext(DimensionsContext)
 
@@ -48,7 +48,7 @@ export const ProductPage = () => {
 
                 <section>
                     <p>
-                        {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= 1000 ? 'products' : ''}`}
+                        {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= 1000 ? ' products' : ''}`}
                     </p>
                 </section>
 

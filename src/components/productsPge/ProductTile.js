@@ -21,7 +21,7 @@ export const ProductTile = ({ product }) => {
 
             <div className={style.productTileContentContainer}>
                 <h3>{product.name}</h3>
-                <p>{product.description.length <= 30 ? product.description : product.description.substring(0, 31) + '...'}</p>
+                <p>{product.description.length < 25 ? product.description : product.description.substring(0, 25) + '...'}</p>
 
                 <p><strong>{product.price.toFixed(2)}$</strong></p>
 

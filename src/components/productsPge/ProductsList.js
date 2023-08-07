@@ -67,7 +67,7 @@ export const ProductsList = ({ setItemsShownHandler }) => {
     }, [queryParamsObj, setQueryParams, products])
 
     return (
-        <section>
+        <section className={style.productListSection}>
             <div id="productsList" className={style.productGrid}>
                 {
                     products.list.map(p => <ProductTile key={p._id} product={p} />)

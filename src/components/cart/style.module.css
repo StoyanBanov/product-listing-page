@@ -4,8 +4,9 @@
     flex-direction: row;
 }
 
-.cart h1 {
+.cart h2 {
     margin-top: 0;
+    text-transform: uppercase;
 }
 
 .cart h4 {
@@ -13,5 +14,5 @@
 }
 
 .cartItemContainer input[type=number] {
-    width: 20px;
+    width: 45px;
 }

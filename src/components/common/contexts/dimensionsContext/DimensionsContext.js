@@ -23,16 +23,38 @@ export const DimensionsContextProvider = ({ children }) => {
         setDimensions({
             windowWidth: width
         })
-        if (width < 1000) {
-            rootPseudoElement.style.setProperty('--width', `${300 - Math.trunc((1000 - width) / 4.2)}px`)
-            rootPseudoElement.style.setProperty('--height', `${450 - Math.trunc((1000 - width) / 4)}px`)
 
-            rootPseudoElement.style.setProperty('--fontSize', `${16 - Math.trunc((1000 - width) / 160)}px`)
+        let rowSize
+        if (width > 2600) {
+            rowSize = 7
+        } else if (width > 1920) {
+            rowSize = 6
+        } else if (width > 1350) {
+            rowSize = 5
+        } else if (width > 1000) {
+            rowSize = 4
+        } else if (width > 750) {
+            rowSize = 3
         } else {
-            rootPseudoElement.style.setProperty('--width', `${300}px`)
-            rootPseudoElement.style.setProperty('--height', `${450}px`)
+            rowSize = 2
+        }
+        rootPseudoElement.style.setProperty('--rowSize', rowSize)
 
-            rootPseudoElement.style.setProperty('--fontSize', `${16}px`)
+        let mainWidth
+        if (width > 1200) {
+            mainWidth = window.innerWidth * 0.8
+            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
+            rootPseudoElement.style.setProperty('--prodGridWidth', `${mainWidth - mainWidth / rowSize}px`)
+        }
+        else if (width > 750) {
+            mainWidth = window.innerWidth * 0.9
+            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
+        } else if (width > 580) {
+            mainWidth = window.innerWidth * 0.8
+            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
+        } else {
+            mainWidth = window.innerWidth * 0.9
+            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
         }
     }
 
