@@ -4,6 +4,8 @@ import { MAX_PRICE_DEFAULT, SHOW_PRODUCTS_DEFAULT } from "./constants"
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 import style from './style.module.css'
+import { getProducts } from "../../data/services/productService"
+import { useParams } from "react-router-dom"
 
 export const ProductFilters = () => {
     const [filters, setFilters] = useState({
@@ -13,22 +15,33 @@ export const ProductFilters = () => {
         search: ''
     })
 
+    const { catId } = useParams()
+
     const { queryParamsObj, setQueryParams } = useQueryParams()
 
     const { windowWidth } = useContext(DimensionsContext)
 
+    const [potentialProdsCount, setPotentialProdsCount] = useState(0)
+
     useEffect(() => {
         if (windowWidth && queryParamsObj) {
-            if (windowWidth < 700 && queryParamsObj.show > 5)
-                setFilters(state => ({ ...state, ...queryParamsObj, show: 5 }));
+            if (windowWidth < 700 && queryParamsObj.show > 5) {
+                queryParamsObj.show = 5
+                setFilters(state => ({ ...state, ...queryParamsObj }));
+            }
             else
                 setFilters(state => ({ ...state, ...queryParamsObj }));
-        }
-    }, [queryParamsObj, windowWidth])
 
-    const changeFilterHandler = useCallback(e => {
+            getProducts({ catId, ...queryParamsObj })
+                .then(data => setPotentialProdsCount(data.totalCount))
+        }
+    }, [catId, queryParamsObj, windowWidth])
+
+    const changeFilterHandler = e => {
         setFilters(state => ({ ...state, [e.target.name]: e.target.value }))
-    }, [])
+        getProducts({ catId, ...filters, [e.target.name]: e.target.value })
+            .then(data => setPotentialProdsCount(data.totalCount))
+    }
 
     const submitFiltersHandler = useCallback(e => {
         e.preventDefault()
@@ -62,6 +75,8 @@ export const ProductFilters = () => {
         }
 
         setFilters(state => ({ ...state, [id]: Math.trunc((Number(dragItem.current.style.cx) + adjustment) * (MAX_PRICE_DEFAULT / 200)) }))
+        getProducts({ catId, ...filters, [id]: Math.trunc((Number(dragItem.current.style.cx) + adjustment) * (MAX_PRICE_DEFAULT / 200)) })
+            .then(data => setPotentialProdsCount(data.totalCount))
     }
 
     const dragStart = (e) => {
@@ -124,7 +139,7 @@ export const ProductFilters = () => {
                     <input id="searchFilter" name="search" value={filters.search} onChange={changeFilterHandler} />
                 </div>
 
-                <button>SHOW RESULTS</button>
+                <button>SHOW RESULTS ({potentialProdsCount})</button>
             </form>
         </aside>
     )
