@@ -31,16 +31,16 @@ export const ProductFilters = () => {
             }
             else
                 setFilters(state => ({ ...state, ...queryParamsObj }));
-
-            getProducts({ catId, ...queryParamsObj })
-                .then(data => setPotentialProdsCount(data.totalCount))
         }
     }, [catId, queryParamsObj, windowWidth])
 
+    useEffect(() => {
+        getProducts({ catId, ...filters })
+            .then(data => setPotentialProdsCount(data.totalCount))
+    }, [filters, catId])
+
     const changeFilterHandler = e => {
         setFilters(state => ({ ...state, [e.target.name]: e.target.value }))
-        getProducts({ catId, ...filters, [e.target.name]: e.target.value })
-            .then(data => setPotentialProdsCount(data.totalCount))
     }
 
     const submitFiltersHandler = useCallback(e => {
@@ -75,8 +75,6 @@ export const ProductFilters = () => {
         }
 
         setFilters(state => ({ ...state, [id]: Math.trunc((Number(dragItem.current.style.cx) + adjustment) * (MAX_PRICE_DEFAULT / 200)) }))
-        getProducts({ catId, ...filters, [id]: Math.trunc((Number(dragItem.current.style.cx) + adjustment) * (MAX_PRICE_DEFAULT / 200)) })
-            .then(data => setPotentialProdsCount(data.totalCount))
     }
 
     const dragStart = (e) => {
