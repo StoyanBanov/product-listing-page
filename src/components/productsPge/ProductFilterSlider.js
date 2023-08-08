@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react'
 import style from './style.module.css'
+import { useQueryParams } from '../common/hooks/useQueryParams'
 
 const leftStart = 10
 const rightStart = 190
 
 export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } }) => {
+
+    const { queryParamsObj } = useQueryParams()
+
     const priceRef = useRef()
     const minPriceRef = useRef()
     const maxPriceRef = useRef()
@@ -14,16 +18,33 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
     const rightCircle = useRef()
 
     useEffect(() => {
+        if ((queryParamsObj?.minPrice || queryParamsObj?.maxPrice) && min && max) {
+            leftCircle.current.style.cx =
+                queryParamsObj.minPrice &&
+                    queryParamsObj.minPrice <= max &&
+                    queryParamsObj.minPrice >= min &&
+                    queryParamsObj.minPrice < (queryParamsObj.maxPrice || max)
+                    ? (queryParamsObj.minPrice - Math.trunc(min)) / (Math.ceil(max) / 200) + 10 : ''
 
-        if (leftCircle.current && rightCircle.current && max && min) {
-            minPriceRef.current.value = min
-            maxPriceRef.current.value = max
+            rightCircle.current.style.cx =
+                queryParamsObj.maxPrice &&
+                    queryParamsObj.maxPrice <= max &&
+                    queryParamsObj.maxPrice >= min &&
+                    queryParamsObj.maxPrice > (queryParamsObj.minPrice || min)
+                    ? (queryParamsObj.maxPrice - Math.floor(min)) / (Math.ceil(max) / 200) - 10 : ''
 
-            leftCircle.current.style.cx = ''
-            rightCircle.current.style.cx = ''
+            if (max === min) {
+                minPriceRef.current.value = max
+                maxPriceRef.current.value = max
+            } else {
+                minPriceRef.current.value = Math.floor((queryParamsObj.minPrice && queryParamsObj.minPrice > min) ? queryParamsObj.minPrice : min)
+                maxPriceRef.current.value = Math.ceil((queryParamsObj.maxPrice && queryParamsObj.maxPrice < max) ? queryParamsObj.maxPrice : max)
+            }
+        } else if (leftCircle.current && rightCircle.current && max && min) {
+            minPriceRef.current.value = Math.floor(min)
+            maxPriceRef.current.value = Math.ceil(max)
         }
-
-    }, [min, max])
+    }, [queryParamsObj, min, max])
 
     const mouseMoveHandler = e => {
         if (!dragItem.current) return
@@ -45,7 +66,8 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
             else if (currentCx < border) dragItem.current.style.cx = border
         }
 
-        priceRef.current.value = Math.trunc((Number(dragItem.current.style.cx) + adjustment) * ((max) / 200) + min)
+        const calculation = (Number(dragItem.current.style.cx) + adjustment) * ((max - min) / 200) + min
+        priceRef.current.value = id === 'minPrice' ? Math.trunc(calculation) : Math.ceil(calculation)
     }
 
     const dragStart = e => {
@@ -75,7 +97,7 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
         <>
             <div className={style.filterPriceSlider}>
                 <svg width={200} height={20}>
-                    <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={10} />
+                    <line x1={10} y1={10} x2={190} y2={10} stroke="gray" strokeWidth={5} />
                     <circle ref={leftCircle} id="minPrice" onMouseDown={dragStart} cx={10} cy={10} r={10} fill={max !== min ? "green" : "gray"} />
                     <circle ref={rightCircle} id="maxPrice" onMouseDown={dragStart} cx={190} cy={10} r={10} fill={max !== min ? "red" : "gray"} />
                 </svg>
@@ -84,11 +106,11 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
             <div>
                 <div>
                     <label>min</label>
-                    <input ref={minPriceRef} type="number" name="minPrice" min={0} max={1000} disabled />
+                    <input className={style.priceRangeInput} ref={minPriceRef} type="number" name="minPrice" min={0} max={1000} disabled />
                 </div>
                 <div>
                     <label>max</label>
-                    <input ref={maxPriceRef} type="number" name="maxPrice" min={0} max={1000} disabled />
+                    <input className={style.priceRangeInput} ref={maxPriceRef} type="number" name="maxPrice" min={0} max={1000} disabled />
                 </div>
             </div>
         </>

@@ -9,6 +9,7 @@ import { usePop } from "../common/hooks/usePop"
 import { PopBefore } from "../common/helpers/popBefore/PopBefore"
 
 import style from './style.module.css'
+import { ProductsShow } from "./ProductsShow"
 
 export const ProductPage = () => {
     const filtersRef = useRef()
@@ -55,7 +56,10 @@ export const ProductPage = () => {
                 {
                     windowWidth >= 1000 &&
                     <section>
-                        <ProductsSort />
+                        <div className={style.sortShowContainer}>
+                            <ProductsSort />
+                            <ProductsShow />
+                        </div>
                     </section>
                 }
             </div>
@@ -63,15 +67,16 @@ export const ProductPage = () => {
             {
                 windowWidth < 1000 &&
                 <div className={style.mobileSortFilterContainer}>
-                    <button className={style.mobileFiltersBtn} onClick={displayFiltersClickHandler}>Filters</button>
+                    <button className={style.mobileFiltersBtn} onClick={displayFiltersClickHandler}>Filter/Search</button>
                     {displayFilters &&
-                        <PopBefore popRef={filtersRef} displayPopClickHandler={displayFiltersClickHandler}>
+                        <PopBefore popRef={filtersRef} displayPopClickHandler={displayFiltersClickHandler} closeBtnText={`SHOW RESULTS (${itemsShown.total})`}>
                             <ProductFilters productsCount={itemsShown.total} />
                         </PopBefore>
                     }
 
-                    <section className={style.mobileSortContainer}>
+                    <section className={style.sortShowContainer}>
                         <ProductsSort />
+                        <ProductsShow />
                     </section>
                 </div>
             }

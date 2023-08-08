@@ -45,10 +45,11 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
     })
 }
 
-export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', ...ranges }) {
+export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', sort, show, skip, ...ranges }) {
     const { list } = await getProducts({ catId, search, ...ranges })
 
-    const { list: listR } = await getProducts({ catId, search })
+    //TODO multiple ranges
+    const { list: listR } = await getProducts({ catId, search, minPrice, maxPrice })
 
     const prodKeys = Object.keys(new Product())
 

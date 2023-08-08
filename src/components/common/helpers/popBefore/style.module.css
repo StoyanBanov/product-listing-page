@@ -29,6 +29,27 @@
     margin: 0;
 }
 
+.popCloseBtnContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.popCloseBtnContainer button {
+    padding: 5px;
+    font-weight: bold;
+    background: aliceblue;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid gray;
+}
+
+.popCloseBtnContainer button:hover {
+    background: rgb(245, 250, 255);
+    border: 1px solid black;
+}
+
 @media only screen and (max-width: 600px) {
     .popContainer {
         width: 100%;

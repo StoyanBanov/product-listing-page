@@ -1,29 +1,24 @@
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useQueryParams } from "../common/hooks/useQueryParams"
-import { MAX_PRICE_DEFAULT, MAX_SHOW_PER_WIDTH, SHOW_PRODUCTS_DEFAULT } from "./constants"
+import { MAX_PRICE_DEFAULT } from "./constants"
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 import style from './style.module.css'
 import { getProductRanges } from "../../data/services/productService"
 import { useParams } from "react-router-dom"
-import { setCorrectShowValue } from "./util"
 import { ProductFilterSlider } from "./ProductFilterSlider"
 import { HiddenSub } from "../common/helpers/hiddenSub/HiddenSub"
 
-export const ProductFilters = ({ productsCount }) => {
+export const ProductFilters = () => {
     const [filters, setFilters] = useState({
-        show: SHOW_PRODUCTS_DEFAULT,
-        minPrice: 0,
-        maxPrice: MAX_PRICE_DEFAULT,
+        minPrice: '',
+        maxPrice: '',
         search: ''
     })
 
     const [dataRanges, setDataRanges] = useState({})
 
-    const [initialPrices, setInitialPrices] = useState({
-        min: 0,
-        max: MAX_PRICE_DEFAULT
-    })
+    const [initialPrices, setInitialPrices] = useState()
 
     const { catId } = useParams()
 
@@ -33,7 +28,6 @@ export const ProductFilters = ({ productsCount }) => {
 
     useEffect(() => {
         if (windowWidth && queryParamsObj) {
-            let show = setCorrectShowValue(queryParamsObj.show, windowWidth)
             getProductRanges({ catId, ...queryParamsObj })
                 .then(data => {
                     const filterRanges = {}
@@ -50,13 +44,12 @@ export const ProductFilters = ({ productsCount }) => {
                     setDataRanges(dataRanges)
 
                     const defFilters = {
-                        show: SHOW_PRODUCTS_DEFAULT,
-                        minPrice: 0,
-                        maxPrice: MAX_PRICE_DEFAULT,
+                        minPrice: '',
+                        maxPrice: '',
                         search: ''
                     }
 
-                    setFilters({ ...defFilters, ...queryParamsObj, ...filterRanges, show })
+                    setFilters({ ...defFilters, ...queryParamsObj, ...filterRanges })
 
                     setInitialPrices({ min: data.minPrice, max: data.maxPrice })
                 })
@@ -67,88 +60,129 @@ export const ProductFilters = ({ productsCount }) => {
         const key = e.currentTarget.name ?? e.currentTarget.getAttribute('name')
         const value = e.currentTarget.name ? e.currentTarget.value : e.currentTarget.getAttribute('value')
 
-        setFilters(state => ({ ...state, [key]: Array.isArray(state[key]) ? [...state[key], value] : value }))
+        setFilters(state => (
+            {
+                ...state,
+                [key]: Array.isArray(state[key])
+                    ? state[key].includes(value)
+                        ? state[key].filter(v => v !== value)
+                        : [...state[key], value]
+                    : value
+            }
+        ))
 
         const filtersProper = Object.entries(filters).reduce((obj, [k, v]) => {
-            if (Array.isArray(filters[k])) {
-                if (key === k && !filters[k].includes(value)) {
-                    v.push(value)
+            if (Array.isArray(v)) {
+                if (key === k) {
+                    if (!v.includes(value)) {
+                        v.push(value)
+                    } else {
+                        v.splice(v.indexOf(value), 1)
+                    }
                 }
-                obj[k] = `${v.join(',')}`
+                if (v.length > 0)
+                    obj[k] = `${v.join(',')}`
             }
             else {
-                obj[k] = key === k ? value : v
+                if (v || k === key)
+                    obj[k] = key === k ? value : v
             }
             return obj
         }, {})
 
-        if (key === 'search') {
-            setQueryParams({ search: value, skip: 0 })
-        } else
+        if (key !== 'search') {
             setQueryParams({ ...filtersProper, skip: 0 })
+        }
     }
 
     const changePrices = (minPrice, maxPrice) => {
         setFilters(state => ({ ...state, minPrice, maxPrice }))
 
-        const rangesProper = Object.entries(filters).reduce((obj, [k, v]) => {
-            if (Array.isArray(filters[k])) {
+        const filtersProper = Object.entries(filters).reduce((obj, [k, v]) => {
+            if (Array.isArray(v) && v.length > 0 && !(v.length === 1 && !v[0])) {
+                console.log(v.length, v[0]);
                 obj[k] = `${v.join(',')}`
+            }
+            else {
+                if (v)
+                    obj[k] = v
             }
             return obj
         }, {})
 
-        setQueryParams({ ...filters, ...rangesProper, minPrice, maxPrice, skip: 0 })
+        setQueryParams({ ...filtersProper, minPrice, maxPrice, skip: 0 })
     }
 
-    const submitFiltersHandler = useCallback(e => {
+    const submitSearchHandler = useCallback(e => {
         e.preventDefault()
 
         setQueryParams({ ...queryParamsObj, search: filters.search, skip: 0 })
     }, [setQueryParams, filters, queryParamsObj])
 
+    const resetFiltersHandler = useCallback(() => {
+        const resetObj = {
+            skip: 0
+        }
+        if (queryParamsObj.show)
+            resetObj.show = queryParamsObj.show
+        if (queryParamsObj.sortBy)
+            resetObj.sortBy = queryParamsObj.sortBy
+        if (queryParamsObj.order)
+            resetObj.order = queryParamsObj.order
+        if (queryParamsObj.search)
+            resetObj.search = queryParamsObj.search
+
+        setQueryParams(resetObj)
+    }, [setQueryParams, queryParamsObj])
+
     return (
         <aside className={style.filtersContainer}>
-            <h3>FILTERS</h3>
+            <div className={style.searchContainer}>
+                <form>
+                    <div>
+                        <input placeholder="search" id="searchFilter" name="search" value={filters.search} onChange={changeFilterHandler} />
 
-            <form className={style.filterForm} onSubmit={submitFiltersHandler}>
-                <div>
-                    <label htmlFor="showFilter">Show</label>
-                    <select id="showFilter" name="show" value={filters.show} onChange={changeFilterHandler}>
-                        <option value={2}>2</option>
-                        <option value={5}>5</option>
-                        {
-                            Object.values(MAX_SHOW_PER_WIDTH).map((s, i) => <option key={i} value={s}>{s}</option>)
-                        }
-                    </select>
-                </div>
+                        <svg onClick={submitSearchHandler} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g>
+                        </svg>
+                    </div>
+                </form>
+            </div>
 
-                <div>
-                    <label htmlFor="searchFilter">Search</label>
-                    <input id="searchFilter" name="search" value={filters.search} onChange={changeFilterHandler} />
-                </div>
+            <div className={style.FiltersHeader}>
+                <h3>FILTERS</h3>
+                <button onClick={resetFiltersHandler}>Reset</button>
+            </div>
 
-                <div className={style.filterPriceContainer}>
-                    <label>Price</label>
-                    <ProductFilterSlider changePrices={changePrices} initialValues={initialPrices} />
-                </div>
-
+            <div className={style.filterForm}>
                 {
                     Object.entries(dataRanges).map(([k, v]) =>
-                        <HiddenSub key={k} title={k}>
+                        <HiddenSub key={k} title={k} initialVisibility={queryParamsObj[k]}>
                             {
-                                <ul>
+                                <ul className={style.mobileNav}>
                                     {
-                                        v.map(a => <li name={k} value={a} onClick={changeFilterHandler} key={a}>{a}</li>)
+                                        v.map(a => <li name={k} value={a} onClick={changeFilterHandler} key={a}>
+                                            {a}
+
+                                            {filters[k].includes(a) &&
+                                                <svg width={15} height={15} stroke="black" strokeWidth={1}>
+                                                    <line x1={2} y1={2} x2={13} y2={13} />
+                                                    <line x1={2} y1={13} x2={13} y2={2} />
+                                                </svg>
+                                            }
+                                        </li>)
                                     }
                                 </ul>
                             }
                         </HiddenSub>
                     )
                 }
-
-                <button>SHOW RESULTS ({productsCount})</button>
-            </form>
+                <HiddenSub title={"Price"} initialVisibility={filters && filters.minPrice && filters.maxPrice}>
+                    <div className={style.filterPriceContainer}>
+                        <ProductFilterSlider changePrices={changePrices} initialValues={initialPrices ?? { min: '', max: '' }} />
+                    </div>
+                </HiddenSub>
+            </div>
         </aside>
     )
 }

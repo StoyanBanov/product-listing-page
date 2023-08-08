@@ -1,18 +1,22 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import style from './style.module.css'
 
-export const HiddenSub = ({ children, title, initialVisibility = false }) => {
-    const [itemsVisibility, setItemsVisibility] = useState(initialVisibility)
+export const HiddenSub = ({ children, title, initialVisibility }) => {
+    const [itemsVisibility, setItemsVisibility] = useState(false)
+
+    useEffect(() => {
+        setItemsVisibility(initialVisibility)
+    }, [initialVisibility])
 
     const showNavItemHandler = useCallback(e => {
         setItemsVisibility(state => !state)
     }, [])
 
     return (
-        <div className={style.hiddenSubContainer}>
+        <div style={itemsVisibility ? { color: 'black' } : { color: 'rgb(70, 70, 70)' }} className={style.hiddenSubContainer}>
             <div id="categories" onClick={showNavItemHandler} className={style.hiddenSubTop}>
                 <div>
-                    <span>{title}</span>
+                    <span style={itemsVisibility ? { fontWeight: 'bold' } : {}}>{title}</span>
                 </div>
 
                 <svg width={18} height={18} fill="none" stroke="black" strokeWidth={2}>
