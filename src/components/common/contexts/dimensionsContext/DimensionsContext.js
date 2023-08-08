@@ -43,19 +43,22 @@ export const DimensionsContextProvider = ({ children }) => {
         let mainWidth
         if (width > 1200) {
             mainWidth = window.innerWidth * 0.8
-            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
             rootPseudoElement.style.setProperty('--prodGridWidth', `${mainWidth - mainWidth / rowSize}px`)
         }
         else if (width > 750) {
             mainWidth = window.innerWidth * 0.9
-            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
         } else if (width > 580) {
             mainWidth = window.innerWidth * 0.8
-            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
         } else {
             mainWidth = window.innerWidth * 0.9
-            rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
         }
+
+        rootPseudoElement.style.setProperty('--mainWidth', `${mainWidth}px`)
+
+        if (width > 450)
+            rootPseudoElement.style.setProperty('--fontSize', `${mainWidth / rowSize / 16.1}px`)
+        else
+            rootPseudoElement.style.setProperty('--fontSize', `${mainWidth / rowSize / 14}px`)
     }
 
     return (

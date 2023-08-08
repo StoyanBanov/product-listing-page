@@ -19,7 +19,7 @@ export const CategoryDropDown = () => {
             onMouseOut={categoryDropDownHandler}
             className={style.categoryDropDownContainer}
         >
-            <span>Categories</span>
+            <span >Categories</span>
 
             {showDropDown &&
                 <ul className={style.categoryDropDown}>

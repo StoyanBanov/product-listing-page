@@ -10,7 +10,7 @@
     --width: calc((var(--mainWidth) / var(--rowSize)) - 1vw);
     --height: calc(var(--width) * 1.6);
     --fontSize: calc(var(--width) / 16);
-    --imageHeight: calc(var(--width) - 20px);
+    --imageHeight: calc(var(--width) * 0.9);
 }
 
 main {
@@ -22,4 +22,8 @@ main {
 svg,
 button {
     cursor: pointer;
+}
+
+*:focus {
+    outline: none;
 }

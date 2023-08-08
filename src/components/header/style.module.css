@@ -41,6 +41,10 @@ nav {
     align-items: center;
 }
 
+nav svg {
+    flex-shrink: 0;
+}
+
 nav span {
     text-transform: uppercase;
 }

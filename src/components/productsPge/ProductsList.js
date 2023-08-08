@@ -9,7 +9,7 @@ import style from './style.module.css'
 import { setCorrectShowValue } from "./util"
 
 
-export const ProductsList = ({ setItemsShownHandler }) => {
+export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
     const [products, setProducts] = useState({ list: [], totalCount: 0, currentCount: 0 })
 
     const { catId } = useParams()
@@ -32,6 +32,8 @@ export const ProductsList = ({ setItemsShownHandler }) => {
 
     useEffect(() => {
         if (queryParamsObj && dim.current.windowWidth) {
+            changeIsLoading(true)
+
             let show = setCorrectShowValue(queryParamsObj.show, dim.current.windowWidth)
 
             if (startSkip.current !== undefined) {
@@ -48,9 +50,10 @@ export const ProductsList = ({ setItemsShownHandler }) => {
                             ? { ...data, currentCount }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
                     })
+                    changeIsLoading(false)
                 })
         }
-    }, [catId, queryParamsObj])
+    }, [catId, queryParamsObj, changeIsLoading])
 
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.currentCount
@@ -66,10 +69,12 @@ export const ProductsList = ({ setItemsShownHandler }) => {
                 }
             </div>
 
-            {products.totalCount > products.currentCount
-                ? <button onClick={loadMoreProductsHandler}>Load More</button>
-                : <p>No more products</p>
-            }
+            <div className={style.loadMoreBtnContainer}>
+                {products.totalCount > products.currentCount
+                    ? <button onClick={loadMoreProductsHandler}>Load More</button>
+                    : <p>No more products</p>
+                }
+            </div>
         </section>
     )
 }

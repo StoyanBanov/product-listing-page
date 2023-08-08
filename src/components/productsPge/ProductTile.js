@@ -2,6 +2,8 @@ import { useCallback, useContext } from 'react'
 import { CartContext } from '../common/contexts/CartContext'
 
 import style from './style.module.css'
+import { CartSVG } from '../common/helpers/CartSVG'
+import { DimensionsContext } from '../common/contexts/dimensionsContext/DimensionsContext'
 
 export const ProductTile = ({ product }) => {
     const { addToCart } = useContext(CartContext)
@@ -11,8 +13,10 @@ export const ProductTile = ({ product }) => {
         window.alert(`${product.name} added to cart!`)
     }, [addToCart, product])
 
+    const { windowWidth } = useContext(DimensionsContext)
+
     return (
-        <div className={style.productTile}>
+        <div style={{ position: windowWidth <= 450 ? 'relative' : '' }} className={style.productTile}>
             <div className={style.productTileImgContainer}>
                 <div>
                     <img src={'/images/' + product.thumbnail} alt={product.name} />
@@ -28,21 +32,19 @@ export const ProductTile = ({ product }) => {
                 <p>{'★'.repeat(product.rating) + '☆'.repeat(5 - product.rating)}</p>
             </div>
 
-            <button onClick={addToCartHandler} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <svg stroke='black' strokeWidth={2} height="25" width="25" fill='rgb(245, 245, 245)'>
-                    <path d="M19 7 L20 4 L23 4" />
-
-                    <path d="M1 7 L19 7 L16 15 L2 15 Z" />
-
-                    <path d="M2 18 L16 18" />
-
-                    <circle r={1} cx={5} cy={21} />
-                    <circle r={1} cx={13} cy={21} />
-                </svg>
-                <span>
-                    ADD TO CART
-                </span>
-            </button>
+            <div style={windowWidth <= 450 ? { position: 'absolute', bottom: '2%', right: '4%' } : {}}>
+                <button className={style.addToCartBtn} onClick={addToCartHandler}>
+                    <div style={{ width: windowWidth > 450 ? '20px' : '15px', display: 'flex' }}>
+                        <CartSVG />
+                    </div>
+                    <span>
+                        {windowWidth > 450
+                            ? 'ADD TO CART'
+                            : 'ADD'
+                        }
+                    </span>
+                </button>
+            </div>
         </div>
     )
 }

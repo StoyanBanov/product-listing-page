@@ -22,6 +22,8 @@ export const ProductPage = () => {
 
     const { windowWidth } = useContext(DimensionsContext)
 
+    const [isLoading, setIsLoading] = useState(false)
+
     useEffect(() => {
         getCategoryById(catId)
             .then(cat => setCatDesc(cat.description))
@@ -37,8 +39,16 @@ export const ProductPage = () => {
         displayPopHandler(isOpening, filtersRef)
     }, [displayPopHandler, filtersRef])
 
+    const changeIsLoading = useCallback((value) => {
+        setIsLoading(value)
+    }, [])
+
     return (
         <>
+            {isLoading &&
+                <div className={style.loadingOverlay}></div>
+            }
+
             <div className={style.topSections}>
                 <section>
                     <article className={style.categoryDescription}>
@@ -87,7 +97,7 @@ export const ProductPage = () => {
                     <ProductFilters productsCount={itemsShown.total} />
                 }
 
-                <ProductsList setItemsShownHandler={setItemsShownHandler} />
+                <ProductsList setItemsShownHandler={setItemsShownHandler} changeIsLoading={changeIsLoading} />
             </div>
 
         </>
