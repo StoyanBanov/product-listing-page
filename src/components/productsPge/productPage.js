@@ -66,7 +66,7 @@ export const ProductPage = () => {
                     <button className={style.mobileFiltersBtn} onClick={displayFiltersClickHandler}>Filters</button>
                     {displayFilters &&
                         <PopBefore popRef={filtersRef} displayPopClickHandler={displayFiltersClickHandler}>
-                            <ProductFilters />
+                            <ProductFilters productsCount={itemsShown.total} />
                         </PopBefore>
                     }
 
@@ -79,7 +79,7 @@ export const ProductPage = () => {
             <div className={style.productsContainer}>
                 {
                     windowWidth >= 1000 &&
-                    <ProductFilters />
+                    <ProductFilters productsCount={itemsShown.total} />
                 }
 
                 <ProductsList setItemsShownHandler={setItemsShownHandler} />

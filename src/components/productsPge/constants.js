@@ -1,6 +1,6 @@
 export const SHOW_PRODUCTS_DEFAULT = 20
 
-export const MAX_PRICE_DEFAULT = 10000
+export const MAX_PRICE_DEFAULT = 1000
 
 export const MAX_ROWS = 5
 

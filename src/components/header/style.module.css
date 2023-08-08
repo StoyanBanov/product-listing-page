@@ -153,34 +153,6 @@ nav span {
     display: block;
     text-decoration: none;
     color: black;
-    padding-left: 20px;
-}
-
-.popNavItem {
-    cursor: pointer;
-    box-sizing: border-box;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom: 1px solid gray;
-}
-
-.popNavItemTop {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.popNavItemTop:hover {
-    opacity: 80%;
-}
-
-.popNavItemTop>div {
-    flex-grow: 1;
 }
 
 @media screen and (max-width: 1000px) {

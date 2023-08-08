@@ -6,7 +6,8 @@
         "name": "prod1",
         "description": "short desc 1",
         "price": 10.50,
-        "rating": 4
+        "rating": 4,
+        "dialColor": "blue"
     },
     {
         "_id": "2",
@@ -15,7 +16,8 @@
         "name": "prod2",
         "description": "short desc 2",
         "price": 22.50,
-        "rating": 5
+        "rating": 5,
+        "dialColor": "red"
     },
     {
         "_id": "3",
@@ -24,7 +26,8 @@
         "name": "prod3",
         "description": "short desc 3",
         "price": 22.50,
-        "rating": 3
+        "rating": 3,
+        "dialColor": "green"
     },
     {
         "_id": "4",
@@ -33,7 +36,8 @@
         "name": "prod4",
         "description": "short desc 4",
         "price": 300.50,
-        "rating": 2
+        "rating": 2,
+        "dialColor": "blue"
     },
     {
         "_id": "5",
@@ -42,7 +46,8 @@
         "name": "prod5",
         "description": "short desc 5",
         "price": 400.50,
-        "rating": 4
+        "rating": 4,
+        "dialColor": "red"
     },
     {
         "_id": "6",
@@ -51,25 +56,28 @@
         "name": "prod6",
         "description": "short desc 6",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "dialColor": "red"
     },
     {
         "_id": "7",
         "catId": "1",
         "thumbnail": "watch7PNG.png",
-        "name": "prod7",
+        "name": "prod7j",
         "description": "short desc 7 asdasdasdsadasdasdasdas",
         "price": 400.50,
-        "rating": 4
+        "rating": 4,
+        "dialColor": "red"
     },
     {
         "_id": "8",
         "catId": "1",
         "thumbnail": "watch8PNG.png",
-        "name": "prod8",
+        "name": "prod8j",
         "description": "short desc 8",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "dialColor": "blue"
     },
     {
         "_id": "9",
@@ -78,7 +86,8 @@
         "name": "prod9",
         "description": "short desc 9",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "red"
     },
     {
         "_id": "10",
@@ -87,7 +96,8 @@
         "name": "prod10",
         "description": "short desc 10",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "gold"
     },
     {
         "_id": "11",
@@ -96,7 +106,8 @@
         "name": "prod11",
         "description": "short desc 11",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "silver"
     },
     {
         "_id": "12",
@@ -105,7 +116,8 @@
         "name": "prod12",
         "description": "short desc 12",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "pink"
     },
     {
         "_id": "13",
@@ -114,7 +126,8 @@
         "name": "prod13",
         "description": "short desc 13",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "gold"
     },
     {
         "_id": "14",
@@ -123,6 +136,7 @@
         "name": "prod14",
         "description": "short desc 14",
         "price": 22.50,
-        "rating": 1
+        "rating": 1,
+        "mainColor": "gold"
     }
 ]
