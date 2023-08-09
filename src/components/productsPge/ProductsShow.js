@@ -23,6 +23,8 @@ export const ProductsShow = () => {
         setQueryParams({ ...queryParamsObj, show: value, skip: 0 })
     }, [queryParamsObj, setQueryParams])
 
+    const showWidths = Object.keys(MAX_SHOW_PER_WIDTH).map(Number).sort((a, b) => a - b)
+
     return (
         <div className={style.showContainer}>
             <label htmlFor="showFilter">Show</label>
@@ -30,7 +32,7 @@ export const ProductsShow = () => {
                 <option value={2}>2</option>
                 <option value={5}>5</option>
                 {
-                    Object.values(MAX_SHOW_PER_WIDTH).map((s, i) => <option key={i} value={s}>{s}</option>)
+                    showWidths.slice(0, showWidths.findIndex(b => b >= windowWidth) + 1).map((s, i) => <option key={i} value={MAX_SHOW_PER_WIDTH[s]}>{MAX_SHOW_PER_WIDTH[s]}</option>)
                 }
             </select>
         </div>

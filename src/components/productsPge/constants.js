@@ -35,7 +35,7 @@ Object.defineProperties(MAX_SHOW_PER_WIDTH, {
         value: 2 * MAX_ROWS,
         enumerable: true
     },
-    1000: {
+    1350: {
         value: 3 * MAX_ROWS,
         enumerable: true
     },
