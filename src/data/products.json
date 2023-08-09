@@ -64,7 +64,7 @@
         "catId": "1",
         "thumbnail": "watch7PNG.png",
         "name": "prod7j",
-        "description": "short desc 7 asdasdasdsadasdasdasdas",
+        "description": "short desc 7 longer than usual for testing",
         "price": 400.50,
         "rating": 4,
         "dialColor": "red"
@@ -138,5 +138,485 @@
         "price": 22.50,
         "rating": 1,
         "mainColor": "gold"
+    },
+    {
+        "_id": "15",
+        "catId": "1",
+        "thumbnail": "watch1PNG.png",
+        "name": "prod15",
+        "description": "short desc 15",
+        "price": 365,
+        "rating": 4,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "16",
+        "catId": "1",
+        "thumbnail": "watch2PNG.png",
+        "name": "prod16",
+        "description": "short desc 16",
+        "price": 34,
+        "rating": 3,
+        "dialColor": "green"
+    },
+    {
+        "_id": "17",
+        "catId": "1",
+        "thumbnail": "watch3PNG.png",
+        "name": "prod17",
+        "description": "short desc 17",
+        "price": 223.79,
+        "rating": 2,
+        "dialColor": "green"
+    },
+    {
+        "_id": "18",
+        "catId": "1",
+        "thumbnail": "watch4PNG.png",
+        "name": "prod18",
+        "description": "short desc 18",
+        "price": 100.50,
+        "rating": 2,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "19",
+        "catId": "1",
+        "thumbnail": "watch5PNG.png",
+        "name": "prod19",
+        "description": "short desc 19",
+        "price": 146.99,
+        "rating": 5,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "20",
+        "catId": "1",
+        "thumbnail": "watch6PNG.png",
+        "name": "prod20",
+        "description": "short desc 20",
+        "price": 367.40,
+        "rating": 1,
+        "dialColor": "red"
+    },
+    {
+        "_id": "21",
+        "catId": "1",
+        "thumbnail": "watch7PNG.png",
+        "name": "prod21j",
+        "description": "short desc 21 longer than usual for testing",
+        "price": 400.50,
+        "rating": 0,
+        "dialColor": "green"
+    },
+    {
+        "_id": "22",
+        "catId": "1",
+        "thumbnail": "watch8PNG.png",
+        "name": "prod22",
+        "description": "short desc 22",
+        "price": 99.99,
+        "rating": 3,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "23",
+        "catId": "2",
+        "thumbnail": "neck1.png",
+        "name": "prod23",
+        "description": "short desc 23",
+        "price": 47,
+        "rating": 2,
+        "mainColor": "red"
+    },
+    {
+        "_id": "24",
+        "catId": "2",
+        "thumbnail": "neck2.png",
+        "name": "prod24",
+        "description": "short desc 24",
+        "price": 111,
+        "rating": 5,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "25",
+        "catId": "2",
+        "thumbnail": "neck3.png",
+        "name": "prod25",
+        "description": "short desc 25",
+        "price": 32,
+        "rating": 5,
+        "mainColor": "silver"
+    },
+    {
+        "_id": "26",
+        "catId": "2",
+        "thumbnail": "neck4.png",
+        "name": "prod26",
+        "description": "short desc 26",
+        "price": 121.99,
+        "rating": 2,
+        "mainColor": "pink"
+    },
+    {
+        "_id": "27",
+        "catId": "2",
+        "thumbnail": "neck5.png",
+        "name": "prod27",
+        "description": "short desc 27",
+        "price": 20,
+        "rating": 4,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "28",
+        "catId": "2",
+        "thumbnail": "neck6.png",
+        "name": "prod28",
+        "description": "short desc 28",
+        "price": 78,
+        "rating": 4,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "29",
+        "catId": "2",
+        "thumbnail": "neck1.png",
+        "name": "prod29",
+        "description": "short desc 29",
+        "price": 11,
+        "rating": 0,
+        "mainColor": "red"
+    },
+    {
+        "_id": "30",
+        "catId": "2",
+        "thumbnail": "neck2.png",
+        "name": "prod30",
+        "description": "short desc 30",
+        "price": 62,
+        "rating": 3,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "31",
+        "catId": "2",
+        "thumbnail": "neck3.png",
+        "name": "prod31",
+        "description": "short desc 31",
+        "price": 49.99,
+        "rating": 4,
+        "mainColor": "silver"
+    },
+    {
+        "_id": "32",
+        "catId": "2",
+        "thumbnail": "neck4.png",
+        "name": "prod32",
+        "description": "short desc 32",
+        "price": 18,
+        "rating": 4,
+        "mainColor": "pink"
+    },
+    {
+        "_id": "33",
+        "catId": "2",
+        "thumbnail": "neck5.png",
+        "name": "prod33",
+        "description": "short desc 33",
+        "price": 97,
+        "rating": 2,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "34",
+        "catId": "2",
+        "thumbnail": "neck6.png",
+        "name": "prod34",
+        "description": "short desc 34",
+        "price": 83,
+        "rating": 5,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "36",
+        "catId": "2",
+        "thumbnail": "neck4.png",
+        "name": "prod36",
+        "description": "short desc 36",
+        "price": 31.99,
+        "rating": 3,
+        "mainColor": "pink"
+    },
+    {
+        "_id": "37",
+        "catId": "2",
+        "thumbnail": "neck5.png",
+        "name": "prod37",
+        "description": "short desc 37",
+        "price": 82,
+        "rating": 1,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "38",
+        "catId": "2",
+        "thumbnail": "neck6.png",
+        "name": "prod38",
+        "description": "short desc 38",
+        "price": 47,
+        "rating": 4,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "39",
+        "catId": "2",
+        "thumbnail": "neck1.png",
+        "name": "prod39",
+        "description": "short desc 39",
+        "price": 91,
+        "rating": 4,
+        "mainColor": "red"
+    },
+    {
+        "_id": "40",
+        "catId": "2",
+        "thumbnail": "neck2.png",
+        "name": "prod40",
+        "description": "short desc 40",
+        "price": 40,
+        "rating": 2,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "41",
+        "catId": "2",
+        "thumbnail": "neck3.png",
+        "name": "prod41",
+        "description": "short desc 41",
+        "price": 99.99,
+        "rating": 4,
+        "mainColor": "silver"
+    },
+    {
+        "_id": "42",
+        "catId": "2",
+        "thumbnail": "neck4.png",
+        "name": "prod42",
+        "description": "short desc 42",
+        "price": 65,
+        "rating": 4,
+        "mainColor": "pink"
+    },
+    {
+        "_id": "43",
+        "catId": "2",
+        "thumbnail": "neck5.png",
+        "name": "prod43",
+        "description": "short desc 43",
+        "price": 39.40,
+        "rating": 5,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "44",
+        "catId": "2",
+        "thumbnail": "neck6.png",
+        "name": "prod44",
+        "description": "short desc 44",
+        "price": 17,
+        "rating": 1,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "45",
+        "catId": "1",
+        "thumbnail": "watch1PNG.png",
+        "name": "prod45",
+        "description": "short desc 45",
+        "price": 399,
+        "rating": 5,
+        "dialColor": "sapphire"
+    },
+    {
+        "_id": "46",
+        "catId": "1",
+        "thumbnail": "watch2PNG.png",
+        "name": "prod46",
+        "description": "short desc 46",
+        "price": 18.99,
+        "rating": 2,
+        "dialColor": "green"
+    },
+    {
+        "_id": "47",
+        "catId": "1",
+        "thumbnail": "watch3PNG.png",
+        "name": "prod47",
+        "description": "short desc 47",
+        "price": 128,
+        "rating": 2,
+        "dialColor": "green"
+    },
+    {
+        "_id": "48",
+        "catId": "1",
+        "thumbnail": "watch4PNG.png",
+        "name": "prod48",
+        "description": "short desc 48",
+        "price": 247.68,
+        "rating": 3,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "49",
+        "catId": "1",
+        "thumbnail": "watch5PNG.png",
+        "name": "prod49",
+        "description": "short desc 49",
+        "price": 287,
+        "rating": 1,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "50",
+        "catId": "1",
+        "thumbnail": "watch6PNG.png",
+        "name": "prod50",
+        "description": "short desc 50",
+        "price": 80,
+        "rating": 4,
+        "dialColor": "red"
+    },
+    {
+        "_id": "51",
+        "catId": "1",
+        "thumbnail": "watch7PNG.png",
+        "name": "prod51j",
+        "description": "short desc 51 longer than usual for testing",
+        "price": 333.33,
+        "rating": 1,
+        "dialColor": "green"
+    },
+    {
+        "_id": "52",
+        "catId": "1",
+        "thumbnail": "watch8PNG.png",
+        "name": "prod52",
+        "description": "short desc 52",
+        "price": 299.99,
+        "rating": 0,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "53",
+        "catId": "1",
+        "thumbnail": "watch2PNG.png",
+        "name": "prod53",
+        "description": "short desc 53",
+        "price": 170,
+        "rating": 2,
+        "dialColor": "green"
+    },
+    {
+        "_id": "54",
+        "catId": "1",
+        "thumbnail": "watch3PNG.png",
+        "name": "prod54",
+        "description": "short desc 54",
+        "price": 54.54,
+        "rating": 2,
+        "dialColor": "green"
+    },
+    {
+        "_id": "55",
+        "catId": "1",
+        "thumbnail": "watch4PNG.png",
+        "name": "prod55",
+        "description": "short desc 55",
+        "price": 201,
+        "rating": 3,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "56",
+        "catId": "1",
+        "thumbnail": "watch5PNG.png",
+        "name": "prod56",
+        "description": "short desc 56",
+        "price": 187,
+        "rating": 1,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "57",
+        "catId": "1",
+        "thumbnail": "watch6PNG.png",
+        "name": "prod57",
+        "description": "short desc 57",
+        "price": 93.99,
+        "rating": 4,
+        "dialColor": "red"
+    },
+    {
+        "_id": "58",
+        "catId": "1",
+        "thumbnail": "watch7PNG.png",
+        "name": "prod58j",
+        "description": "short desc 58 longer than usual for testing",
+        "price": 326.60,
+        "rating": 3,
+        "dialColor": "green"
+    },
+    {
+        "_id": "59",
+        "catId": "1",
+        "thumbnail": "watch8PNG.png",
+        "name": "prod59",
+        "description": "short desc 59",
+        "price": 359.99,
+        "rating": 0,
+        "dialColor": "blue"
+    },
+    {
+        "_id": "60",
+        "catId": "2",
+        "thumbnail": "neck1.png",
+        "name": "prod60",
+        "description": "short desc 60",
+        "price": 47,
+        "rating": 2,
+        "mainColor": "red"
+    },
+    {
+        "_id": "61",
+        "catId": "2",
+        "thumbnail": "neck2.png",
+        "name": "prod61",
+        "description": "short desc 61",
+        "price": 111,
+        "rating": 5,
+        "mainColor": "gold"
+    },
+    {
+        "_id": "62",
+        "catId": "2",
+        "thumbnail": "neck3.png",
+        "name": "prod62",
+        "description": "short desc 62",
+        "price": 11.50,
+        "rating": 3,
+        "mainColor": "silver"
+    },
+    {
+        "_id": "63",
+        "catId": "1",
+        "thumbnail": "watch1PNG.png",
+        "name": "prod63",
+        "description": "short desc 63",
+        "price": 300,
+        "rating": 5,
+        "dialColor": "sapphire"
     }
 ]

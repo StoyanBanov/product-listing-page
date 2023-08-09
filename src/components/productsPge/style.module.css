@@ -363,7 +363,7 @@
 
 .loadMoreBtnContainer {
     margin-top: 2vh;
-    width: 70%;
+    width: calc(var(--width) * (var(--rowSize) - 2));
     display: flex;
     flex-direction: column;
     justify-content: center;
