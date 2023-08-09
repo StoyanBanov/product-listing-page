@@ -38,15 +38,15 @@ export const ProductTile = ({ product }) => {
 
             <div style={windowWidth <= 450 ? { position: 'absolute', bottom: '2%', right: '4%' } : {}}>
                 <button className={style.addToCartBtn} onClick={addToCartHandler}>
-                    <div style={{ width: windowWidth > 450 ? '20px' : '15px', display: 'flex' }}>
-                        <CartSVG />
-                    </div>
                     <span>
                         {windowWidth > 450
                             ? 'ADD TO CART'
                             : 'ADD'
                         }
                     </span>
+                    <div style={{ width: windowWidth > 450 ? '20px' : '15px', display: 'flex' }}>
+                        <CartSVG />
+                    </div>
                 </button>
             </div>
         </div>

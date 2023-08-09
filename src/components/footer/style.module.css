@@ -1,6 +1,6 @@
 .footerContainer {
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     margin-top: 2vh;
     background-color: black;
     color: white;
@@ -13,7 +13,8 @@
     margin-left: 0.5vw;
     margin-right: 0.5vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     width: var(--mainWidth)
 }
 
@@ -25,4 +26,10 @@
 .footerContainer a:hover {
     text-decoration: underline;
     color: white;
+}
+
+@media screen and (max-width: 1000px) {
+    .footerItemsContainer {
+        justify-content: space-between;
+    }
 }

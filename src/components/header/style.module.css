@@ -1,7 +1,7 @@
 header {
     position: sticky;
     top: -54px;
-    z-index: 2;
+    z-index: 5;
     padding-top: 1vh;
     padding-bottom: 1vh;
     background-color: rgb(253, 253, 253);

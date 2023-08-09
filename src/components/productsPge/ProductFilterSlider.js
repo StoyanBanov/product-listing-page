@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import style from './style.module.css'
 import { useQueryParams } from '../common/hooks/useQueryParams'
+import { MAX_PRICE_DEFAULT } from './constants'
 
 export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } }) => {
 
@@ -76,11 +77,11 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
             <div className={style.filterPriceSliderValues}>
                 <div>
                     <label>min</label>
-                    <input className={style.priceRangeInput} ref={minPriceRef} type="number" name="minPrice" min={0} max={1000} disabled />
+                    <input className={style.priceRangeInput} ref={minPriceRef} type="number" name="minPrice" min={0} max={MAX_PRICE_DEFAULT} disabled />
                 </div>
                 <div>
                     <label>max</label>
-                    <input className={style.priceRangeInput} ref={maxPriceRef} type="number" name="maxPrice" min={0} max={1000} disabled />
+                    <input className={style.priceRangeInput} ref={maxPriceRef} type="number" name="maxPrice" min={0} max={MAX_PRICE_DEFAULT} disabled />
                 </div>
             </div>
         </>

@@ -52,7 +52,7 @@ export const CartContextProvider = ({ children }) => {
 
         changedCart.totalPrice = changedCart.items.reduce((total, i) => total + i.item.price * i.count, 0)
 
-        sessionStorage.setItem('cart', JSON.stringify(changedCart))
+        localStorage.setItem('cart', JSON.stringify(changedCart))
 
         return changedCart
     }, [])
@@ -60,7 +60,7 @@ export const CartContextProvider = ({ children }) => {
     const [cart, dispatch] = useReducer(reducer, { ...cartInitialState })
 
     useEffect(() => {
-        let guestCart = JSON.parse(sessionStorage.getItem('cart'))
+        let guestCart = JSON.parse(localStorage.getItem('cart'))
         if (guestCart) {
             dispatch({ type: 'setCart', cart: guestCart })
         } else {

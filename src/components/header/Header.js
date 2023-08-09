@@ -63,8 +63,8 @@ export const Header = () => {
                             <img height={44} src={`/images/logo${windowWidth > 550 ? 'Type' : ''}.png`} alt="logo" />
                         </>
                     }
-                    {
-                        scroll > 55 &&
+
+                    {scroll > 55 && windowWidth >= 1000 &&
                         <img height={44} style={{ marginRight: '20px' }} src={`/images/logo.png`} alt="logo" />
                     }
 
