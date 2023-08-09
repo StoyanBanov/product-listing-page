@@ -24,7 +24,7 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
 
     useEffect(() => {
         dim.current = dimensions
-    }, [dimensions])
+    }, [dimensions, queryParamsObj])
 
     useEffect(() => {
         setItemsShownHandler({ shown: products.currentCount, total: products.totalCount })
@@ -56,8 +56,11 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
     }, [catId, queryParamsObj, changeIsLoading])
 
     useEffect(() => {
-        if (products && products.list.length && startSkip.current !== undefined) {
-            window.scrollTo(0, 100000)
+        if (startSkip.current !== undefined && products.list.length) {
+            if (products && products.list.length > setCorrectShowValue(products.list.length, dim.current.windowWidth)) {
+                console.log('here');
+                window.scrollTo(0, document.body.scrollHeight)
+            }
             startSkip.current = undefined
         }
     }, [products])
