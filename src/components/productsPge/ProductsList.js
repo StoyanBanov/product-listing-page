@@ -39,7 +39,6 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
             if (startSkip.current !== undefined) {
                 show += (queryParamsObj.skip ?? 0)
                 queryParamsObj.skip = startSkip.current
-                startSkip.current = undefined
             }
 
             getProducts({ catId, ...queryParamsObj, show })
@@ -50,10 +49,18 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
                             ? { ...data, currentCount }
                             : ({ list: [...state.list, ...data.list], totalCount: data.totalCount, currentCount })
                     })
+
                     changeIsLoading(false)
                 })
         }
     }, [catId, queryParamsObj, changeIsLoading])
+
+    useEffect(() => {
+        if (products && products.list.length && startSkip.current !== undefined) {
+            window.scrollTo(0, 100000)
+            startSkip.current = undefined
+        }
+    }, [products])
 
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.currentCount
