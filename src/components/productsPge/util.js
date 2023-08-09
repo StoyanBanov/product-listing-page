@@ -11,7 +11,7 @@ export function setCorrectShowValue(initialShow, currentWidth) {
 export function parseFilters(filters) {
     return Object.entries(filters).reduce((obj, [k, v]) => {
         if (Array.isArray(v) && v.length > 0 && !(v.length === 1 && !v[0])) {
-            obj[k] = `${v.join(',')}`
+            obj[k] = v.join(',')
         } else if (v) obj[k] = v
 
         return obj

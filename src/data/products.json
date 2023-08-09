@@ -617,6 +617,6 @@
         "description": "short desc 63",
         "price": 300,
         "rating": 5,
-        "dialColor": "sapphire"
+        "dialColor": "red"
     }
 ]

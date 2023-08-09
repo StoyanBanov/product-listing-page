@@ -71,8 +71,8 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
     return (
         <>
             <div className={style.filterPriceSlider}>
-                <input name='minPrice' ref={leftCircle} type='range' onMouseDown={dragStart} min={Math.floor(min)} max={Math.ceil(max)} onChange={onSliderValueChange} />
-                <input name='maxPrice' ref={rightCircle} type='range' onMouseDown={dragStart} min={Math.floor(min)} max={Math.ceil(max)} onChange={onSliderValueChange} />
+                <input name='minPrice' ref={leftCircle} type='range' onMouseDown={dragStart} min={Math.floor(min)} max={Math.ceil(max)} onChange={onSliderValueChange} disabled={min === max} />
+                <input name='maxPrice' ref={rightCircle} type='range' onMouseDown={dragStart} min={Math.floor(min)} max={Math.ceil(max)} onChange={onSliderValueChange} disabled={min === max} />
             </div>
 
             <div className={style.filterPriceSliderValues}>

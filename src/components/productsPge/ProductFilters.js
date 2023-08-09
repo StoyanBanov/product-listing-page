@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useQueryParams } from "../common/hooks/useQueryParams"
-import { MAX_PRICE_DEFAULT } from "./constants"
 import { DimensionsContext } from "../common/contexts/dimensionsContext/DimensionsContext"
 
 import style from './style.module.css'
@@ -70,7 +69,7 @@ export const ProductFilters = () => {
         setFilters(state => ({ ...state, [key]: newFilter }))
 
         if (key !== 'search') {
-            setQueryParams({ ...parseFilters(filters), [key]: newFilter, skip: 0 })
+            setQueryParams({ ...parseFilters(filters, key, newFilter), [key]: Array.isArray(newFilter) ? newFilter.join(',') : newFilter, skip: 0 })
         }
     }
 
