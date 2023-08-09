@@ -27,3 +27,7 @@ button {
 *:focus {
     outline: none;
 }
+
+svg:hover {
+    stroke: gray
+}

@@ -39,3 +39,7 @@ export function isPriceValid(price, max, min) {
         price <= max &&
         price >= min
 }
+
+export function trimText(text, maxWidth) {
+    return text.substring(0, maxWidth - 3) + (text.length >= maxWidth ? '...' : '')
+}

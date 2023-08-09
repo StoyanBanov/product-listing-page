@@ -5,22 +5,28 @@ import style from './style.module.css'
 import { CartSVG } from '../common/helpers/CartSVG'
 import { DimensionsContext } from '../common/contexts/dimensionsContext/DimensionsContext'
 import { AlertContext } from '../common/contexts/alertContext/AlertContext'
+import { trimText } from './util'
+import { CRITICAL_WIDTH } from './constants'
 
 export const ProductTile = ({ product }) => {
-    const { addToCart } = useContext(CartContext)
+    const { addToCart, cartDropDownRef } = useContext(CartContext)
 
     const { showAlert } = useContext(AlertContext)
+
+    const { windowWidth } = useContext(DimensionsContext)
 
     const addToCartHandler = useCallback(async () => {
         const alreadyIn = await addToCart(product, 1)
 
-        showAlert({ content: alreadyIn ? `${product.name} is already added!` : `Added ${product.name} to cart!` })
-    }, [addToCart, product, showAlert])
+        if (windowWidth > 550) {
+            cartDropDownRef.current.style.display = 'block'
+        }
 
-    const { windowWidth } = useContext(DimensionsContext)
+        showAlert({ content: alreadyIn ? `${product.name} is already added!` : `Added ${product.name} to cart!` })
+    }, [addToCart, cartDropDownRef, product, showAlert, windowWidth])
 
     return (
-        <div style={{ position: windowWidth <= 450 ? 'relative' : '' }} className={style.productTile}>
+        <div style={{ position: windowWidth <= CRITICAL_WIDTH ? 'relative' : '' }} className={style.productTile}>
             <div className={style.productTileImgContainer}>
                 <div>
                     <img src={'/images/' + product.thumbnail} alt={product.name} />
@@ -28,23 +34,23 @@ export const ProductTile = ({ product }) => {
             </div>
 
             <div className={style.productTileContentContainer}>
-                <h3>{product.name}</h3>
-                <p>{product.description.length < 25 ? product.description : product.description.substring(0, 25) + '...'}</p>
+                <h3>{trimText(product.name, 20)}</h3>
+                <p>{trimText(product.description, 28)}</p>
 
                 <p><strong>{product.price.toFixed(2)}$</strong></p>
 
                 <p>{'★'.repeat(product.rating) + '☆'.repeat(5 - product.rating)}</p>
             </div>
 
-            <div style={windowWidth <= 450 ? { position: 'absolute', bottom: '2%', right: '4%' } : {}}>
+            <div style={windowWidth <= CRITICAL_WIDTH ? { position: 'absolute', bottom: '2%', right: '4%' } : {}}>
                 <button className={style.addToCartBtn} onClick={addToCartHandler}>
                     <span>
-                        {windowWidth > 450
+                        {windowWidth > CRITICAL_WIDTH
                             ? 'ADD TO CART'
                             : 'ADD'
                         }
                     </span>
-                    <div style={{ width: windowWidth > 450 ? '20px' : '15px', display: 'flex' }}>
+                    <div style={{ width: windowWidth > CRITICAL_WIDTH ? '20px' : '15px', display: 'flex' }}>
                         <CartSVG />
                     </div>
                 </button>

@@ -71,8 +71,6 @@ export const CartContextProvider = ({ children }) => {
     const addToCart = useCallback(async (item, count = 1) => {
         dispatch({ type: 'addToCart', itemObj: { item, count } })
 
-        cartDropDownRef.current.style.display = 'block'
-
         if (cart.items.find(i => i.item._id === item._id)) {
             return true
         }

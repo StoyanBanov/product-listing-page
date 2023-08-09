@@ -4,6 +4,10 @@ export const MAX_PRICE_DEFAULT = 1000
 
 export const MAX_ROWS = 5
 
+export const CRITICAL_WIDTH = 450
+
+export const MOBILE_WIDTH_MAX = 1000
+
 export const WIDTH_BORDERS = {}
 
 Object.defineProperties(WIDTH_BORDERS, {

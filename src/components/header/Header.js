@@ -74,7 +74,6 @@ export const Header = () => {
 
                     <div className={style.cartDiv}>
                         <button
-                            onClick={cartClickHandler}
                             onMouseOver={cartHoverHandler}
                             onMouseOut={cartHoverHandler}
                         >

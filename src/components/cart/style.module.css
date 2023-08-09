@@ -1,4 +1,6 @@
 .cartItemContainer {
+    width: 100%;
+    font-size: calc(var(--fontSize) * 1.2);
     margin-top: 10px;
     display: flex;
     flex-direction: row;
@@ -7,6 +9,7 @@
 .cart h2 {
     margin-top: 0;
     text-transform: uppercase;
+    position: relative;
 }
 
 .cart h4 {
@@ -15,4 +18,56 @@
 
 .cartItemContainer input[type=number] {
     width: 45px;
+}
+
+.cartItemContainer {
+    border-bottom: 1px solid gray;
+    width: calc(var(--width) * 1.3);
+    height: calc(var(--width) / 5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cartItemContainer .cartItemTop {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.cartItemContainer .cartItemBot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartItemBot button,
+.cartEmptyBtn {
+    border: none;
+    background: none;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+
+.cartItemBot button {
+    margin-left: 5%;
+}
+
+.cartEmptyBtn {
+    color: black;
+    position: absolute;
+    right: 1vw;
+    top: 1vh;
+}
+
+.cartEmptyBtn:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 300px) {
+    .cartItemContainer input[type=number] {
+        width: 40px;
+    }
 }

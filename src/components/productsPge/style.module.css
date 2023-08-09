@@ -53,6 +53,10 @@
     -webkit-box-reflect: below 0px linear-gradient(180deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.5));
 }
 
+.productTileImgContainer img:hover {
+    height: calc(var(--imageHeight) * 1.1);
+}
+
 .productTileImgContainer div {
     height: calc(var(--imageHeight) * 1.1);
     overflow: hidden;

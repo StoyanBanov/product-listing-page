@@ -10,6 +10,7 @@ import { PopBefore } from "../common/helpers/popBefore/PopBefore"
 
 import style from './style.module.css'
 import { ProductsShow } from "./ProductsShow"
+import { MOBILE_WIDTH_MAX } from "./constants"
 
 export const ProductPage = () => {
     const filtersRef = useRef()
@@ -59,12 +60,12 @@ export const ProductPage = () => {
 
                 <section className={style.productsTotalSection}>
                     <p>
-                        {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= 1000 ? ' products' : ''}`}
+                        {`${itemsShown.shown}/${itemsShown.total}${windowWidth >= MOBILE_WIDTH_MAX ? ' products' : ''}`}
                     </p>
                 </section>
 
                 {
-                    windowWidth >= 1000 &&
+                    windowWidth >= MOBILE_WIDTH_MAX &&
                     <section>
                         <div className={style.sortShowContainer}>
                             <ProductsSort />
@@ -75,7 +76,7 @@ export const ProductPage = () => {
             </div>
 
             {
-                windowWidth < 1000 &&
+                windowWidth < MOBILE_WIDTH_MAX &&
                 <div className={style.mobileSortFilterContainer}>
                     <button className={style.mobileFiltersBtn} onClick={displayFiltersClickHandler}>Filter/Search</button>
                     {displayFilters &&
@@ -93,7 +94,7 @@ export const ProductPage = () => {
 
             <div className={style.productsContainer}>
                 {
-                    windowWidth >= 1000 &&
+                    windowWidth >= MOBILE_WIDTH_MAX &&
                     <ProductFilters productsCount={itemsShown.total} />
                 }
 
