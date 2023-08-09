@@ -13,16 +13,29 @@ export const DimensionsContextProvider = ({ children }) => {
 
         window.addEventListener('resize', updateDimensions)
 
+        window.addEventListener('scroll', updateScroll)
+
         return () => {
             window.removeEventListener('resize', updateDimensions)
+            window.removeEventListener('scroll', updateScroll)
         }
     }, [])
 
+    const updateScroll = () => {
+        console.log(window.scrollY);
+        setDimensions(state => ({
+            ...state,
+            scroll: window.scrollY
+        }))
+    }
+
     const updateDimensions = () => {
         const width = window.innerWidth
-        setDimensions({
+
+        setDimensions(state => ({
+            ...state,
             windowWidth: width
-        })
+        }))
 
         let rowSize
         if (width > 2600) {

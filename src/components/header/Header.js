@@ -14,7 +14,7 @@ import { CartSVG } from "../common/helpers/CartSVG"
 
 export const Header = () => {
 
-    const { windowWidth } = useContext(DimensionsContext)
+    const { windowWidth, scroll } = useContext(DimensionsContext)
 
     const { cartDropDownRef } = useContext(CartContext)
 
@@ -36,7 +36,6 @@ export const Header = () => {
         displayPopHandler(isOpening, categoriesRef)
     }, [displayPopHandler, categoriesRef])
 
-
     return (
         <>
             {displayCategories &&
@@ -48,8 +47,8 @@ export const Header = () => {
             <header>
 
                 {windowWidth >= 1000 &&
-                    <div>
-                        <h1>LOGO</h1>
+                    <div style={{ paddingBottom: '9px', marginLeft: '1vw' }}>
+                        <img height={44} src={'/images/logoType.png'} alt="logo" />
                     </div>
                 }
 
@@ -61,8 +60,12 @@ export const Header = () => {
                                 <line x1={3} y1={17} x2={18} y2={17} />
                                 <line x1={3} y1={27} x2={25} y2={27} />
                             </svg>
-                            <h1>LOGO</h1>
+                            <img height={44} src={`/images/logo${windowWidth > 550 ? 'Type' : ''}.png`} alt="logo" />
                         </>
+                    }
+                    {
+                        scroll > 55 &&
+                        <img height={44} style={{ marginRight: '20px' }} src={`/images/logo.png`} alt="logo" />
                     }
 
                     {windowWidth >= 1000 &&
