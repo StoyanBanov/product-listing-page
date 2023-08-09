@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import style from './style.module.css'
 import { useQueryParams } from '../common/hooks/useQueryParams'
 import { MAX_PRICE_DEFAULT } from './constants'
+import { isPriceValid } from './util'
 
 export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } }) => {
 
@@ -15,57 +16,57 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
     const rightCircle = useRef()
 
     useEffect(() => {
-        if ((queryParamsObj?.minPrice || queryParamsObj?.maxPrice) && min && max) {
-            leftCircle.current.value =
-                queryParamsObj.minPrice &&
-                    queryParamsObj.minPrice <= max &&
-                    queryParamsObj.minPrice >= min &&
-                    queryParamsObj.minPrice < (queryParamsObj.maxPrice || max)
-                    ? queryParamsObj.minPrice : Math.floor(min)
+        if (max && min) {
+            const minBorder = Math.floor(min)
+            const maxBorder = Math.ceil(max)
 
-            rightCircle.current.value =
-                queryParamsObj.maxPrice &&
-                    queryParamsObj.maxPrice <= max &&
-                    queryParamsObj.maxPrice >= min &&
-                    queryParamsObj.maxPrice > (queryParamsObj.minPrice || min)
-                    ? queryParamsObj.maxPrice : Math.ceil(max)
+            if (max === min || (queryParamsObj && !queryParamsObj.minPrice && !queryParamsObj.maxPrice)) {
+                minPriceRef.current.value = minBorder
+                maxPriceRef.current.value = maxBorder
+                leftCircle.current.value = minBorder
+                rightCircle.current.value = maxBorder
 
-            if (max === min) {
-                minPriceRef.current.value = Math.floor(min)
-                maxPriceRef.current.value = Math.ceil(max)
-            } else {
-                minPriceRef.current.value = Math.floor((queryParamsObj.minPrice && queryParamsObj.minPrice > min) ? queryParamsObj.minPrice : min)
-                maxPriceRef.current.value = Math.ceil((queryParamsObj.maxPrice && queryParamsObj.maxPrice < max) ? queryParamsObj.maxPrice : max)
+            } else if (queryParamsObj && (queryParamsObj.minPrice || queryParamsObj.maxPrice)) {
+                const minPrc = (queryParamsObj.minPrice || min)
+                const maxPrc = (queryParamsObj.maxPrice || max)
+
+                const minPriceValue = isPriceValid(minPrc, maxPrc, min) ? minPrc : minBorder
+
+                const maxPriceValue = isPriceValid(maxPrc, max, minPrc) ? maxPrc : maxBorder
+
+                leftCircle.current.value = minPriceValue
+                minPriceRef.current.value = minPriceValue
+
+                rightCircle.current.value = maxPriceValue
+                maxPriceRef.current.value = maxPriceValue
             }
-        } else if (leftCircle.current && rightCircle.current && max && min) {
-            minPriceRef.current.value = Math.floor(min)
-            maxPriceRef.current.value = Math.ceil(max)
-            leftCircle.current.value = Math.floor(min)
-            rightCircle.current.value = Math.ceil(max)
         }
     }, [queryParamsObj, min, max])
 
     const onSliderValueChange = e => {
-        if (e.target.name === 'minPrice' && leftCircle.current.value > rightCircle.current.value - 10) {
-            leftCircle.current.value = rightCircle.current.value - 10
-        } else if (e.target.name === 'maxPrice' && rightCircle.current.value < Number(leftCircle.current.value) + 10) {
-            rightCircle.current.value = Number(leftCircle.current.value) + 10
+        const priceSide = e.target.name === 'minPrice'
+
+        let border
+        if (priceSide && leftCircle.current.value > (border = rightCircle.current.value - 10)) {
+            leftCircle.current.value = border
+        } else if (!priceSide && rightCircle.current.value < (border = Number(leftCircle.current.value) + 10)) {
+            rightCircle.current.value = border
         }
 
-        priceRef.current = e.target.name === 'minPrice' ? minPriceRef.current : maxPriceRef.current
+        priceRef.current = priceSide ? minPriceRef.current : maxPriceRef.current
 
         priceRef.current.value = e.target.value
     }
 
-    const dragStart = e => {
+    const dragStart = () => {
         window.addEventListener('mouseup', dragEnd)
-    };
+    }
 
-    const dragEnd = e => {
+    const dragEnd = () => {
         window.removeEventListener('mouseup', dragEnd)
 
         changePrices(Number(minPriceRef.current.value), Number(maxPriceRef.current.value))
-    };
+    }
 
     return (
         <>

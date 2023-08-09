@@ -8,6 +8,7 @@ import { getProductRanges } from "../../data/services/productService"
 import { useParams } from "react-router-dom"
 import { ProductFilterSlider } from "./ProductFilterSlider"
 import { HiddenSub } from "../common/helpers/hiddenSub/HiddenSub"
+import { getResetQueryParams, parseFilters } from "./util"
 
 export const ProductFilters = () => {
     const [filters, setFilters] = useState({
@@ -33,9 +34,9 @@ export const ProductFilters = () => {
                     const filterRanges = {}
 
                     const dataRanges = Object.entries(data).reduce((obj, [k, v]) => {
-                        if (Array.isArray(data[k])) {
+                        if (Array.isArray(v)) {
                             obj[k] = v
-                            filterRanges[k] = queryParamsObj[k]?.split(',') || []
+                            filterRanges[k] = queryParamsObj[k]?.length ? queryParamsObj[k].split(',') : []
                         }
 
                         return obj
@@ -60,79 +61,33 @@ export const ProductFilters = () => {
         const key = e.currentTarget.name ?? e.currentTarget.getAttribute('name')
         const value = e.currentTarget.name ? e.currentTarget.value : e.currentTarget.getAttribute('value')
 
-        setFilters(state => (
-            {
-                ...state,
-                [key]: Array.isArray(state[key])
-                    ? state[key].includes(value)
-                        ? state[key].filter(v => v !== value)
-                        : [...state[key], value]
-                    : value
-            }
-        ))
+        const newFilter = Array.isArray(filters[key])
+            ? filters[key].includes(value)
+                ? filters[key].filter(v => v !== value)
+                : [...filters[key], value]
+            : value
 
-        const filtersProper = Object.entries(filters).reduce((obj, [k, v]) => {
-            if (Array.isArray(v)) {
-                if (key === k) {
-                    if (!v.includes(value)) {
-                        v.push(value)
-                    } else {
-                        v.splice(v.indexOf(value), 1)
-                    }
-                }
-                if (v.length > 0)
-                    obj[k] = `${v.join(',')}`
-            }
-            else {
-                if (v || k === key)
-                    obj[k] = key === k ? value : v
-            }
-            return obj
-        }, {})
+        setFilters(state => ({ ...state, [key]: newFilter }))
 
         if (key !== 'search') {
-            setQueryParams({ ...filtersProper, skip: 0 })
+            setQueryParams({ ...parseFilters(filters), [key]: newFilter, skip: 0 })
         }
     }
 
     const changePrices = (minPrice, maxPrice) => {
         setFilters(state => ({ ...state, minPrice, maxPrice }))
 
-        const filtersProper = Object.entries(filters).reduce((obj, [k, v]) => {
-            if (Array.isArray(v) && v.length > 0 && !(v.length === 1 && !v[0])) {
-                console.log(v.length, v[0]);
-                obj[k] = `${v.join(',')}`
-            }
-            else {
-                if (v)
-                    obj[k] = v
-            }
-            return obj
-        }, {})
-
-        setQueryParams({ ...filtersProper, minPrice, maxPrice, skip: 0 })
+        setQueryParams({ ...parseFilters(filters), minPrice, maxPrice, skip: 0 })
     }
 
-    const submitSearchHandler = useCallback(e => {
+    const submitSearchHandler = e => {
         e.preventDefault()
 
-        setQueryParams({ ...queryParamsObj, search: filters.search, skip: 0 })
-    }, [setQueryParams, filters, queryParamsObj])
+        setQueryParams({ ...getResetQueryParams(queryParamsObj), search: filters.search, skip: 0 })
+    }
 
     const resetFiltersHandler = useCallback(() => {
-        const resetObj = {
-            skip: 0
-        }
-        if (queryParamsObj.show)
-            resetObj.show = queryParamsObj.show
-        if (queryParamsObj.sortBy)
-            resetObj.sortBy = queryParamsObj.sortBy
-        if (queryParamsObj.order)
-            resetObj.order = queryParamsObj.order
-        if (queryParamsObj.search)
-            resetObj.search = queryParamsObj.search
-
-        setQueryParams(resetObj)
+        setQueryParams(getResetQueryParams(queryParamsObj))
     }, [setQueryParams, queryParamsObj])
 
     return (
@@ -159,10 +114,12 @@ export const ProductFilters = () => {
                     Object.entries(dataRanges).map(([k, v]) =>
                         <HiddenSub key={k} title={k} initialVisibility={queryParamsObj[k]}>
                             {
-                                <ul className={style.mobileNav}>
+                                <ul className={style.hiddenFilterUl}>
                                     {
                                         v.map(a => <li name={k} value={a} onClick={changeFilterHandler} key={a}>
-                                            {a}
+                                            <span>
+                                                {a}
+                                            </span>
 
                                             {filters[k].includes(a) &&
                                                 <svg width={15} height={15} stroke="black" strokeWidth={1}>
