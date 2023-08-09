@@ -5,6 +5,7 @@ import { Header } from './components/header/Header';
 import { ProductPage } from './components/productsPge/ProductPage';
 import { DimensionsContextProvider } from './components/common/contexts/dimensionsContext/DimensionsContext';
 import { CartContextProvider } from './components/common/contexts/CartContext';
+import { AlertContextProvider } from './components/common/contexts/alertContext/AlertContext';
 
 function App() {
 
@@ -12,13 +13,15 @@ function App() {
         <DimensionsContextProvider>
             <CartContextProvider>
                 <Header />
+                <AlertContextProvider>
+                    <main className="mainContainer">
+                        <Routes>
+                            <Route path='/' element={<Navigate to={'categories/1/watches'} replace />} />
+                            <Route path='/categories/:catId/:catName' element={<ProductPage />} />
+                        </Routes>
+                    </main>
+                </AlertContextProvider>
 
-                <main className="mainContainer">
-                    <Routes>
-                        <Route path='/' element={<Navigate to={'categories/1/watches'} replace />} />
-                        <Route path='/categories/:catId/:catName' element={<ProductPage />} />
-                    </Routes>
-                </main>
             </CartContextProvider>
 
             <Footer />

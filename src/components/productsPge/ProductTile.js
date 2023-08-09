@@ -4,14 +4,18 @@ import { CartContext } from '../common/contexts/CartContext'
 import style from './style.module.css'
 import { CartSVG } from '../common/helpers/CartSVG'
 import { DimensionsContext } from '../common/contexts/dimensionsContext/DimensionsContext'
+import { AlertContext } from '../common/contexts/alertContext/AlertContext'
 
 export const ProductTile = ({ product }) => {
     const { addToCart } = useContext(CartContext)
 
+    const { showAlert } = useContext(AlertContext)
+
     const addToCartHandler = useCallback(async () => {
-        await addToCart(product, 1)
-        window.alert(`${product.name} added to cart!`)
-    }, [addToCart, product])
+        const alreadyIn = await addToCart(product, 1)
+
+        showAlert({ content: alreadyIn ? `${product.name} is already added!` : `Added ${product.name} to cart!` })
+    }, [addToCart, product, showAlert])
 
     const { windowWidth } = useContext(DimensionsContext)
 

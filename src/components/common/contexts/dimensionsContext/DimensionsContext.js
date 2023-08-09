@@ -22,7 +22,6 @@ export const DimensionsContextProvider = ({ children }) => {
     }, [])
 
     const updateScroll = () => {
-        console.log(window.scrollY);
         setDimensions(state => ({
             ...state,
             scroll: window.scrollY
