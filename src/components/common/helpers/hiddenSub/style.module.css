@@ -9,8 +9,7 @@
     color: rgb(75, 75, 75);
 }
 
-.hiddenSubTop,
-.hiddenSubBot {
+.hiddenSubTop {
     cursor: pointer;
 }
 

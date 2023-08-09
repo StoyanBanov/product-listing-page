@@ -14,7 +14,7 @@ export const HiddenSub = ({ children, title, initialVisibility }) => {
 
     return (
         <div style={itemsVisibility ? { color: 'black' } : { color: 'rgb(70, 70, 70)' }} className={style.hiddenSubContainer}>
-            <div id="categories" onClick={showNavItemHandler} className={style.hiddenSubTop}>
+            <div onClick={showNavItemHandler} className={style.hiddenSubTop}>
                 <div>
                     <span style={itemsVisibility ? { fontWeight: 'bold' } : {}}>{title}</span>
                 </div>

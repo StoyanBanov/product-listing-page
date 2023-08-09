@@ -368,7 +368,7 @@
 
 .loadMoreBtnContainer {
     margin-top: 2vh;
-    width: calc(var(--mainWidth) / var(--rowSize) * 2);
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -386,6 +386,23 @@
 .loadMoreBtnContainer button:hover {
     border-bottom: 1px solid rgb(0, 0, 0);
     color: rgb(0, 0, 0);
+}
+
+.filterPriceContainer {
+    margin-top: 1vh;
+}
+
+.filterPriceSliderValues {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filterPriceSliderValues div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media screen and (max-width: 1000px) {

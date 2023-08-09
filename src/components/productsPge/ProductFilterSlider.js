@@ -73,12 +73,13 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
     const dragStart = e => {
         dragItem.current = e.target;
         dragItem.current.startPositionX = dragItem.current.getBoundingClientRect().left
-        dragItem.current.radius = dragItem.current.r.baseVal.value
+        const radius = dragItem.current.r.baseVal.value
+        dragItem.current.radius = radius
 
         dragItem.current.startCx =
             Number(dragItem.current.style.cx)
-                ? Number(dragItem.current.style.cx) - dragItem.current.radius
-                : dragItem.current.cx.baseVal.value - dragItem.current.radius
+                ? Number(dragItem.current.style.cx) - radius
+                : dragItem.current.cx.baseVal.value - radius
 
         priceRef.current = document.getElementsByName(e.target.id)[0]
 
@@ -103,7 +104,7 @@ export const ProductFilterSlider = ({ changePrices, initialValues: { min, max } 
                 </svg>
             </div>
 
-            <div>
+            <div className={style.filterPriceSliderValues}>
                 <div>
                     <label>min</label>
                     <input className={style.priceRangeInput} ref={minPriceRef} type="number" name="minPrice" min={0} max={1000} disabled />
