@@ -249,7 +249,7 @@
 .sortContainer label,
 .showContainer label {
     position: absolute;
-    top: -20px;
+    top: -80%;
     font-size: 12px;
 }
 
