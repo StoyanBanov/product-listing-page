@@ -12,7 +12,7 @@ export const Cart = () => {
 
             {cart?.items?.map((itemObj) => <CartItem key={itemObj.item._id} itemObj={itemObj} />)}
 
-            <p><strong>Total: {cart.totalPrice}$</strong></p>
+            <p><strong>Total: {cart.totalPrice.toFixed(2)}$</strong></p>
 
             {cart.items && cart.items.length > 0 &&
                 <>

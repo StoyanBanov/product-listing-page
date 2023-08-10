@@ -19,6 +19,7 @@
 }
 
 .footerContainer a {
+    font-size: calc(var(--fontSize) * 1.1);
     text-decoration: none;
     color: white;
 }
@@ -30,6 +31,6 @@
 
 @media screen and (max-width: 1000px) {
     .footerItemsContainer {
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
 }

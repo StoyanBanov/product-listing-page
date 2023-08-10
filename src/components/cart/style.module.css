@@ -20,6 +20,11 @@
     width: 45px;
 }
 
+.cartItemContainer img {
+    object-fit: contain;
+    width: calc(var(--width) * 0.1);
+}
+
 .cartItemContainer {
     border-bottom: 1px solid gray;
     width: calc(var(--width) * 1.3);
