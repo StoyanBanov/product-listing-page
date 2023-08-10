@@ -8,14 +8,7 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
 
     const searchRegex = new RegExp(search, 'i')
 
-    const filterPredicate = p => {
-        const hasProdFilters =
-            p.catId === catId &&
-            p.price >= minPrice &&
-            p.price <= maxPrice &&
-            (searchRegex.test(p.name) ||
-                searchRegex.test(p.description))
-
+    const filterPredicateGeneral = p => {
         let hasRangeFilters = true
         for (const [key, value] of Object.entries(parseQueryRanges(ranges))) {
             if (!value.includes(p[key])) {
@@ -24,8 +17,16 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
             }
         }
 
-        return hasProdFilters && hasRangeFilters
+        return hasRangeFilters
     }
+
+    const filterPredicatePrices = p =>
+        p.catId === catId &&
+        p.price >= minPrice &&
+        p.price <= maxPrice &&
+        (searchRegex.test(p.name) ||
+            searchRegex.test(p.description))
+
 
     let list = products
 
@@ -39,9 +40,13 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
         })
     }
 
+    list = list.filter(filterPredicateGeneral)
+    if (list.length > 1)
+        list = list.filter(filterPredicatePrices)
+
     return Promise.resolve({
-        list: list.filter(filterPredicate).slice(skip, count || undefined),
-        totalCount: products.filter(filterPredicate).length
+        list: list.slice(skip, count || undefined),
+        totalCount: list.length
     })
 }
 
@@ -49,7 +54,9 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
     const { list } = await getProducts({ catId, search, ...ranges })
 
     //TODO multiple ranges
-    const { list: listR } = await getProducts({ catId, search, minPrice, maxPrice })
+    let prices = { minPrice, maxPrice }
+    if (list.length <= 1) prices = {}
+    const { list: listR } = await getProducts({ catId, search, ...prices })
 
     const prodKeys = Object.keys(new Product())
 

@@ -54,7 +54,7 @@ export const ProductFilters = () => {
                     setInitialPrices({ min: data.minPrice, max: data.maxPrice })
                 })
         }
-    }, [catId, queryParamsObj, windowWidth])
+    }, [catId, queryParamsObj, windowWidth, setQueryParams])
 
     const changeFilterHandler = (e) => {
         const key = e.currentTarget.name ?? e.currentTarget.getAttribute('name')
@@ -69,7 +69,7 @@ export const ProductFilters = () => {
         setFilters(state => ({ ...state, [key]: newFilter }))
 
         if (key !== 'search') {
-            setQueryParams({ ...parseFilters(filters, key, newFilter), [key]: Array.isArray(newFilter) ? newFilter.join(',') : newFilter, skip: 0 })
+            setQueryParams({ ...parseFilters(filters), [key]: Array.isArray(newFilter) ? newFilter.join(',') : newFilter, skip: 0 })
         }
     }
 
@@ -135,7 +135,7 @@ export const ProductFilters = () => {
                 }
                 <HiddenSub title={"Price"} initialVisibility={filters && filters.minPrice && filters.maxPrice}>
                     <div className={style.filterPriceContainer}>
-                        <ProductFilterSlider changePrices={changePrices} initialValues={initialPrices ?? { min: '', max: '' }} />
+                        <ProductFilterSlider changePrices={changePrices} initialValues={initialPrices ?? { min: '', max: '' }} minPrice={filters.minPrice} maxPrice={filters.maxPrice} />
                     </div>
                 </HiddenSub>
             </div>
