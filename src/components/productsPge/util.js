@@ -43,3 +43,9 @@ export function isPriceValid(price, max, min) {
 export function trimText(text, maxWidth) {
     return text.substring(0, maxWidth - 3) + (text.length >= maxWidth ? '...' : '')
 }
+
+const regex = /[a-zA-Z]{1}[a-z]*/g
+
+export function parseRangeName(rangeName) {
+    return [...rangeName.matchAll(regex)].map(([word]) => `${word[0].toUpperCase() + word.substring(1, word.length)}`).join(' ')
+}

@@ -7,7 +7,7 @@ import { getProductRanges } from "../../data/services/productService"
 import { useParams } from "react-router-dom"
 import { ProductFilterSlider } from "./ProductFilterSlider"
 import { HiddenSub } from "../common/helpers/hiddenSub/HiddenSub"
-import { getResetQueryParams, parseFilters } from "./util"
+import { getResetQueryParams, parseFilters, parseRangeName } from "./util"
 
 export const ProductFilters = () => {
     const [filters, setFilters] = useState({
@@ -111,7 +111,7 @@ export const ProductFilters = () => {
             <div className={style.filterForm}>
                 {
                     Object.entries(dataRanges).map(([k, v]) =>
-                        <HiddenSub key={k} title={k} initialVisibility={queryParamsObj[k]}>
+                        <HiddenSub key={k} title={parseRangeName(k)} initialVisibility={queryParamsObj[k]}>
                             {
                                 <ul className={style.hiddenFilterUl}>
                                     {
