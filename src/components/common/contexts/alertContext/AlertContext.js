@@ -5,21 +5,13 @@ import style from './style.module.css'
 export const AlertContext = createContext()
 
 export const AlertContextProvider = ({ children }) => {
-    const [alert, setAlert] = useState({
-        title: 'Alert',
-        content: '',
-        visibility: false
-    })
+    const [alerts, setAlerts] = useState([])
 
     const showAlert = (alert) => {
-        setAlert(state => ({ ...state, ...alert, visibility: true }))
+        setAlerts(state => [...state, alert])
 
         setTimeout(() => {
-            setAlert({
-                title: 'Alert',
-                content: '',
-                visibility: false
-            })
+            setAlerts(state => state.filter(a => a !== alert))
         }, 3000)
     }
 
@@ -27,14 +19,20 @@ export const AlertContextProvider = ({ children }) => {
         <AlertContext.Provider value={{
             showAlert
         }}>
-            {alert.visibility &&
-                <div className={style.alertContainer}>
-                    <div className={style.alert}>
-                        <h2>{alert.title}</h2>
-                        <p>
-                            {alert.content}
-                        </p>
-                    </div>
+            {alerts.length > 0 &&
+                <div className={style.alertsList}>
+                    {
+                        alerts.map((a, i) =>
+                            <div key={i} className={style.alertContainer}>
+                                <div className={style.alert}>
+                                    <h2>{a.title ?? 'Alert'}</h2>
+                                    <p>
+                                        {a.content}
+                                    </p>
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
             }
             {children}

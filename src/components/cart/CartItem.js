@@ -22,7 +22,10 @@ export const CartItem = ({ itemObj: { item, count, _id } }) => {
         <div className={style.cartItemContainer}>
             <div className={style.cartItemTop}>
                 <img src={'/images/' + item.thumbnail} alt={item.name} />
-                <h4>{trimText(item.name, windowWidth >= CRITICAL_WIDTH ? 15 : 10)}</h4>
+                <div>
+                    <h4>{trimText(item.name, windowWidth >= CRITICAL_WIDTH ? 15 : 10)}</h4>
+                    <span>{item.price.toFixed(2)}$</span>
+                </div>
             </div>
 
             <div className={style.cartItemBot}>

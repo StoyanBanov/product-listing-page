@@ -1,14 +1,11 @@
 .alertContainer {
-    position: fixed;
-    top: 5%;
-    width: 100%;
-    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .alert {
+    margin-bottom: 1vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,10 +17,21 @@
     border: 1px solid rgb(209, 226, 228);
 }
 
+.alertsList {
+    position: fixed;
+    top: 5%;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
 .alertContainer p {
+    width: calc(var(--mainWidth) / 1.8);
+    word-wrap: break-word;
     margin: 0;
     padding: 0;
-    font-size: 20px;
+    font-size: calc(var(--fontSize) * 1.2);
 }
 
 .alertContainer h2 {
