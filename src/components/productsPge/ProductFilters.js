@@ -35,7 +35,7 @@ export const ProductFilters = () => {
                     const dataRanges = Object.entries(data).reduce((obj, [k, v]) => {
                         if (Array.isArray(v)) {
                             const queryValues = queryParamsObj[k]?.length ? queryParamsObj[k].split(',') : []
-                            obj[k] = [...new Set([...v, ...queryValues])]
+                            obj[k] = [...new Set([...v, ...queryValues])].sort()
                             filterRanges[k] = queryValues
                         }
 

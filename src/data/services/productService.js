@@ -70,17 +70,17 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
     }
 
     //TODO multiple ranges
-    let prices = { minPrice, maxPrice }
-    if (list.length <= 1) prices = {}
+    let currentRanges = { minPrice, maxPrice }
+    if (list.length <= 1) currentRanges = { ...ranges }
 
-    const { list: listR } = await getProducts({ catId, search, ...prices })
+    const { list: listR } = await getProducts({ catId, search, ...currentRanges })
 
     const prodKeys = Object.keys(new Product())
 
     const rangesEntries = Object.entries(ranges)
 
     await (async () => rangesEntries.forEach(async ([k]) => {
-        const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+        const { list: listF } = await getProducts({ catId, search, ...currentRanges, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
         for (const prod of listF) {
             if (!prodKeys.includes(k)) {
                 if (!prodRanges.hasOwnProperty(k))
@@ -91,7 +91,7 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
     }))()
 
     // rangesEntries.forEach(async ([k]) => {
-    //     const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+    //     const { list: listF } = await getProducts({ catId, search, ...currentRanges, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
     //     for (const prod of listF) {
     //         if (!prodKeys.includes(k)) {
     //             if (!prodRanges.hasOwnProperty(k))
@@ -102,7 +102,7 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
     // })
 
     for (const [k] of rangesEntries) {
-        const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+        const { list: listF } = await getProducts({ catId, search, ...currentRanges, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
         for (const prod of listF) {
             if (!prodKeys.includes(k)) {
                 if (!prodRanges.hasOwnProperty(k))
