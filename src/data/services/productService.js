@@ -53,13 +53,6 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
 export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', sort, show, skip, ...ranges }) {
     const { list } = await getProducts({ catId, search, ...ranges })
 
-    //TODO multiple ranges
-    let prices = { minPrice, maxPrice }
-    if (list.length <= 1) prices = {}
-    const { list: listR } = await getProducts({ catId, search, ...prices })
-
-    const prodKeys = Object.keys(new Product())
-
     const prodRanges = {
         minPrice: list[0]?.price ?? 0,
         maxPrice: list[0]?.price ?? 0
@@ -76,9 +69,52 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
         }
     }
 
+    //TODO multiple ranges
+    let prices = { minPrice, maxPrice }
+    if (list.length <= 1) prices = {}
+
+    const { list: listR } = await getProducts({ catId, search, ...prices })
+
+    const prodKeys = Object.keys(new Product())
+
+    const rangesEntries = Object.entries(ranges)
+
+    await (async () => rangesEntries.forEach(async ([k]) => {
+        const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+        for (const prod of listF) {
+            if (!prodKeys.includes(k)) {
+                if (!prodRanges.hasOwnProperty(k))
+                    prodRanges[k] = new Set()
+                prodRanges[k].add(prod[k])
+            }
+        }
+    }))()
+
+    // rangesEntries.forEach(async ([k]) => {
+    //     const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+    //     for (const prod of listF) {
+    //         if (!prodKeys.includes(k)) {
+    //             if (!prodRanges.hasOwnProperty(k))
+    //                 prodRanges[k] = new Set()
+    //             prodRanges[k].add(prod[k])
+    //         }
+    //     }
+    // })
+
+    for (const [k] of rangesEntries) {
+        const { list: listF } = await getProducts({ catId, search, ...prices, ...Object.fromEntries(rangesEntries.filter(r => r[0] !== k)) })
+        for (const prod of listF) {
+            if (!prodKeys.includes(k)) {
+                if (!prodRanges.hasOwnProperty(k))
+                    prodRanges[k] = new Set()
+                prodRanges[k].add(prod[k])
+            }
+        }
+    }
+
     for (const prod of listR) {
         for (const key in prod) {
-            if (!prodKeys.includes(key)) {
+            if (!prodKeys.includes(key) && !rangesEntries.hasOwnProperty(key)) {
                 if (!prodRanges.hasOwnProperty(key))
                     prodRanges[key] = new Set()
                 prodRanges[key].add(prod[key])
