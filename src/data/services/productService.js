@@ -69,7 +69,6 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
         }
     }
 
-    //TODO multiple ranges
     let currentRanges = { minPrice, maxPrice }
     if (list.length <= 1) currentRanges = { ...ranges }
 
