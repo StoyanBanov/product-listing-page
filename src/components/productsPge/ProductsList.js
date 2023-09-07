@@ -58,7 +58,6 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
     useEffect(() => {
         if (startSkip.current !== undefined && products.list.length) {
             if (products && products.list.length > setCorrectShowValue(products.list.length, dim.current.windowWidth)) {
-                console.log('here');
                 window.scrollTo(0, document.body.scrollHeight)
             }
             startSkip.current = undefined
