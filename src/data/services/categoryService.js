@@ -1,9 +1,11 @@
+import { get } from '../api'
 import categories from '../categories.json'
 
-export function getCategories() {
-    return Promise.resolve(categories)
+export async function getCategories() {
+    return (await get('/classes/Category')).map(c => ({ ...c, _id: c.objectId.toString() }))
+
 }
 
-export function getCategoryById(id) {
-    return Promise.resolve(categories.find(c => c._id === id))
+export async function getCategoryById(id) {
+    return (await get('/classes/Category')).map(c => ({ ...c, _id: c.objectId.toString() })).find(c => c.objectId.toString() === id)
 }

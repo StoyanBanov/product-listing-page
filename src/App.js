@@ -16,7 +16,7 @@ function App() {
                 <AlertContextProvider>
                     <main className="mainContainer">
                         <Routes>
-                            <Route path='/' element={<Navigate to={'categories/1/watches'} replace />} />
+                            <Route path='/' element={<Navigate to={'categories/kXwnMCtjkx/watches'} replace />} />
                             <Route path='/categories/:catId/:catName' element={<ProductPage />} />
                         </Routes>
                     </main>

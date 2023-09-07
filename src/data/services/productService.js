@@ -3,7 +3,9 @@ import { Product } from '../models/Product'
 import products from '../products.json'
 import { parseQueryRanges } from './util';
 
-export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 'desc', minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', ...ranges }) {
+import * as api from '../api'
+
+export async function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 'desc', minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', ...ranges }) {
     const count = skip + show
 
     const searchRegex = new RegExp(search, 'i')
@@ -28,7 +30,9 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
             searchRegex.test(p.description))
 
 
-    let list = products
+    let list = await api.get('/classes/Product')
+
+    list = list.map(p => ({ ...p, _id: p.objectId.toString(), catId: p.catId.objectId.toString() }))
 
     if (sortBy) {
         list.sort((a, b) => {
@@ -44,10 +48,10 @@ export function getProducts({ catId, skip = 0, show, sortBy = 'rating', order = 
     if (list.length > 1)
         list = list.filter(filterPredicatePrices)
 
-    return Promise.resolve({
+    return {
         list: list.slice(skip, count || undefined),
         totalCount: list.length
-    })
+    }
 }
 
 export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRICE_DEFAULT, search = '', sort, show, skip, ...ranges }) {
@@ -69,7 +73,6 @@ export async function getProductRanges({ catId, minPrice = 0, maxPrice = MAX_PRI
         }
     }
 
-    //TODO multiple ranges
     let currentRanges = { minPrice, maxPrice }
     if (list.length <= 1) currentRanges = { ...ranges }
 
