@@ -7,6 +7,7 @@ import { DimensionsContext } from '../common/contexts/dimensionsContext/Dimensio
 import { AlertContext } from '../common/contexts/alertContext/AlertContext'
 import { trimText } from './util'
 import { CRITICAL_WIDTH } from './constants'
+import { ROOT_DIR } from '../../constants'
 
 export const ProductTile = ({ product }) => {
     const { addToCart, cartDropDownRef } = useContext(CartContext)
@@ -29,7 +30,7 @@ export const ProductTile = ({ product }) => {
         <div style={{ position: windowWidth <= CRITICAL_WIDTH ? 'relative' : '' }} className={style.productTile}>
             <div className={style.productTileImgContainer}>
                 <div>
-                    <img src={'/images/' + product.thumbnail} alt={product.name} />
+                    <img src={ROOT_DIR + product.thumbnail} alt={product.name} />
                 </div>
             </div>
 

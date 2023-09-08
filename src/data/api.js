@@ -1,13 +1,11 @@
-const host = 'https://parseapi.back4app.com/'
-const appId = 'YOKOGsGOWDqEmsYrU9nT6jWeNVw0iCe9zaI2mKiu'
-const apiKey = 'nlGgmVYoq2JzL5jTznHIdcA7so0EdTgj1mvuENKD'
+import { APP_ID, HOST, JAVASCRIPT_KEY } from "../constants"
 
 async function request(method, url = '/', data) {
     const options = {
         method,
         headers: {
-            'X-Parse-Application-Id': appId,
-            'X-Parse-JavaScript-Key': apiKey
+            'X-Parse-Application-Id': APP_ID,
+            'X-Parse-JavaScript-Key': JAVASCRIPT_KEY
         }
     }
 
@@ -17,7 +15,7 @@ async function request(method, url = '/', data) {
     }
 
     try {
-        const response = await fetch(host + url, options)
+        const response = await fetch(HOST + url, options)
 
         if (response.status === 204) {
             return response

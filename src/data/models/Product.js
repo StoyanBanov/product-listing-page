@@ -7,6 +7,9 @@ export class Product {
         this.description = description
         this.price = price
         this.rating = rating
+        this.createdAt = Date.now()
+        this.updatedAt = null
+        this.objectId = _id
     }
 }
 

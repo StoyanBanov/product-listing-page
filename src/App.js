@@ -8,7 +8,6 @@ import { CartContextProvider } from './components/common/contexts/CartContext';
 import { AlertContextProvider } from './components/common/contexts/alertContext/AlertContext';
 
 function App() {
-
     return (
         <DimensionsContextProvider>
             <CartContextProvider>
