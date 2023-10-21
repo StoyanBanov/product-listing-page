@@ -7,5 +7,5 @@ export async function getCategories() {
 }
 
 export async function getCategoryById(id) {
-    return (await get('/classes/Category')).map(c => ({ ...c, _id: c.objectId.toString() })).find(c => c.objectId.toString() === id)
+    return (await getCategories()).find(c => c._id === id)
 }

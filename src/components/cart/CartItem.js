@@ -4,6 +4,7 @@ import { CartContext } from '../common/contexts/CartContext'
 import { trimText } from '../productsPge/util'
 import { DimensionsContext } from '../common/contexts/dimensionsContext/DimensionsContext'
 import { CRITICAL_WIDTH } from '../productsPge/constants'
+import { ROOT_DIR } from '../../constants'
 
 export const CartItem = ({ itemObj: { item, count, _id } }) => {
     const { removeFromCart, changeItemCount } = useContext(CartContext)
@@ -21,7 +22,7 @@ export const CartItem = ({ itemObj: { item, count, _id } }) => {
     return (
         <div className={style.cartItemContainer}>
             <div className={style.cartItemTop}>
-                <img src={'/images/' + item.thumbnail} alt={item.name} />
+                <img src={ROOT_DIR + item.thumbnail} alt={item.name} />
                 <div>
                     <h4>{trimText(item.name, windowWidth >= CRITICAL_WIDTH ? 15 : 10)}</h4>
                     <span>{item.price.toFixed(2)}$</span>
