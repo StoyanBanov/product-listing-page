@@ -98,7 +98,7 @@ export const ProductPage = () => {
                     <ProductFilters productsCount={itemsShown.total} />
                 }
 
-                <ProductsList setItemsShownHandler={setItemsShownHandler} changeIsLoading={changeIsLoading} />
+                <ProductsList setItemsShownHandler={setItemsShownHandler} changeIsLoading={changeIsLoading} isLoading={isLoading} />
             </div>
 
         </>

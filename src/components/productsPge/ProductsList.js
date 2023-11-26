@@ -8,9 +8,12 @@ import { DimensionsContext } from "../common/contexts/dimensionsContext/Dimensio
 import style from './style.module.css'
 import { setCorrectShowValue } from "./util"
 
+let interval
 
-export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
+export const ProductsList = ({ setItemsShownHandler, changeIsLoading, isLoading }) => {
     const [products, setProducts] = useState({ list: [], totalCount: 0, currentCount: 0 })
+
+    const [productsMessage, setProductsMessage] = useState()
 
     const { catId } = useParams()
 
@@ -64,6 +67,21 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
         }
     }, [products])
 
+    useEffect(() => {
+        if (isLoading) {
+            setProductsMessage('Loading')
+
+            let dotsCount = 0
+            interval = setInterval(() => {
+                dotsCount > 3 && (dotsCount = 0)
+                setProductsMessage('Loading' + '.'.repeat(dotsCount++))
+            }, 100)
+        } else {
+            clearInterval(interval)
+            setProductsMessage('No more products')
+        }
+    }, [isLoading])
+
     const loadMoreProductsHandler = useCallback(() => {
         const skip = products.currentCount
 
@@ -81,7 +99,7 @@ export const ProductsList = ({ setItemsShownHandler, changeIsLoading }) => {
             <div className={style.loadMoreBtnContainer}>
                 {products.totalCount > products.currentCount
                     ? <button onClick={loadMoreProductsHandler}>Load More</button>
-                    : <p>No more products</p>
+                    : <p>{productsMessage}</p>
                 }
             </div>
         </section>
